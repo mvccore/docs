@@ -1,0 +1,25 @@
+{
+	"name": "mvccore/docs",
+	"type": "library",
+	"description": "MvcCore - Documentation - framework and extensions documentation.",
+	"keywords": [
+		"mvccore",
+		"framework",
+		"docs",
+		"documentation"
+	],
+	"license": ["BSD-3-Clause"],
+	"authors": [{
+		"name": "Tom Flidr",
+		"homepage": "https://github.com/tomFlidr"
+	}],
+	"require": {
+		"php": ">=5.4.0"
+	},
+	"autoload": {
+		"classmap": [
+			"src/"
+		]
+	},
+	"minimum-stability": "dev"
+}
