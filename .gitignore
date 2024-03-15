@@ -51,9 +51,10 @@ Temporary Items
 .hgignore
 .hgtags
 
-*.phpproj
 .vs
+*.phpproj
 *.phpproj.user
+*.code-workspace
 
 vendor/*
 logs/*
