@@ -1,5 +1,21 @@
 # Inicializace controlleru
 
+## Obsah
+- [**Úvod**](#úvod)
+- [**Kdy je inicializace volána, příklad**](#kdy-je-inicializace-volána-příklad)
+- [**Volání rodičivské metody**](#volání-rodičivské-metody)
+- [**Interní zaregistrování `$this` do kolekce všech kontrollerů**](#interní-zaregistrování-this-do-kolekce-všech-kontrollerů)
+- [**Automatické nastartování session podle `$controller->autoStartSession`**](#automatické-nastartování-session-podle-controller-autostartsession)
+- [**Automatická inicializace označených vlastností**](#automatická-inicializace-označených-vlastností)
+  - [**Upozornění pro auto-inicializaci**](#upozornění-pro-auto-inicializaci)
+  - [**Zapnutí auto-inicializace**](#zapnutí-auto-inicializace)
+  - [**Co lze automaticky inicializovat**](#co-lze-automaticky-inicializovat)
+  - [**Tovární metody auto-inicializace**](#tovární-metody-auto-inicializace)
+  - [**Více továrních metod a pořadí**](#více-továrních-metod-a-pořadí)
+  - [**Automatická inicializace versus Dependency Injection pattern**](#automatická-inicializace-versus-dependency-injection-pattern)
+- [**Provolání `Init()` metody na všech dětech**](#provolání-init-metody-na-všech-dětech)
+
+## Úvod
 Inicializace controlleru samozřejmě může probíhat i ve vlastním konstruktoru controlleru.  
 Zde je však "inicialice controlleru" nazýván proces, kdy je na nastavené instanci controlleru 
 volána aplikací veřejná metoda:
@@ -7,6 +23,11 @@ volána aplikací veřejná metoda:
 $controller->Init(): void;
 ```
 
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
+## Kdy je inicializace volána, příklad
 Tato metoda je volána v controlleru pro všechny definované akce. Například pokud má controller následující
 akce, metoda `Init()` se zavolá před každou z nich, ať už se dotazuji na jednu nebo druhou URL.
 Jde o metodu, která řeší inicializaci objektů pro všechny společné věci všech akcí v controlleru:
@@ -41,6 +62,11 @@ class Product extends \MvcCore\Controller {
 }
 ```
 
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
+## Volání rodičivské metody
 Controller má automaticky rozšířením třídy `\MvcCore\Controller` tuto metodu implementovanou od předka.  
 Pokud chceme něco k této mětodě přidat, je nutné vždy volat stejně pojmenovanou metodu rodičovské třídy.
 Rodičovskou metodu bychom měli volat ideálně jako první statement v metodě `Init()`:
@@ -64,8 +90,16 @@ class Base extends \MvcCore\Controller {
 Zavoláním rodičovské metody `parent::Init();` zařídíme:
 - interní zaregistrování `$this` do kolekce všech kontrollerů, pokud ještě neproběhlo,
 - automatické nastartování session podle `$controller->autoStartSession`,
-- automatická inicializace všh označených vlastností - viz. níže,
-- provolání `Init()` metody na všech dětech aktuálního kontextu.
+- automatické nastavení typu odpovědi aplikace (hlavička `Content-Type`) 
+  na výchozí hodnotu `text/html`, pokud je proměnná `$this->ajax` 
+  s hodnotou `TRUE`, nastaví se typ odpovědi na `text/javascript`,
+- automatická inicializace všeh označených vlastností - viz. níže,
+- provolání `Init()` metody na všech dětech (sub-controllerech) 
+  aktuálního controlleru.
+
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
 
 ## Interní zaregistrování `$this` do kolekce všech kontrollerů
 Každý controller je při svém vytvoření v mětodě `\MvcCore\Controller::CreateInstance();` zaregistrován 
@@ -74,10 +108,18 @@ Pokud je metoda `\MvcCore\Controller::CreateInstance();` implementována zcela j
 volání rodičovské funkce `parent::Init()` pro jistotu ověří, zda je aktuální kontext controlleru 
 `$this` zaregistrován v tomto skladu všech controllerů a případně registraci provede.
 
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
 ## Automatické nastartování session podle `$controller->autoStartSession`
 Pokud je z nějakého důvodu třeba nastartovat session pro každý požadavek na aplikaci,
 slouží k tomuto účelu nastavení protected vlastnosti na `$controller->autoStartSession = TRUE;`.
 Výchozím stavem je hodnota `FALSE`, protože session se startuje vždy až když je skutečně třeba.
+
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
 
 ## Automatická inicializace označených vlastností
 Další objekty v kontextu controlleru (jako jsou formuláře, datagridy nebo jakékoliv 
@@ -104,7 +146,7 @@ class Base extends \MvcCore\Controller {
 }
 ```
 
-Starší zápis pomocí PHP Docs vypadá takto:
+Starší zápis pomocí PHPDocs vypadá takto:
 ```php
     /**
      * @autoInit
@@ -113,7 +155,11 @@ Starší zápis pomocí PHP Docs vypadá takto:
     protected $registerForm;
 ```
 
-#### Upozornění pro auto-inicializaci
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
+### Upozornění pro auto-inicializaci
 Tato funkcionalita je magie pro nové vývojáře a není na první pohled jasná.
 Prosím buďte opatrní, zda křivku učení pro své kolegy budete dělat složitější.
 
@@ -127,16 +173,24 @@ Auto-inicializace navíc probíhá pro všechny akce daného controlleru. Pokud 
 nějaký sub-controller v předkovi všech controllerů, je tato auto-inicializace prováděna
 opravdu pro všechny dotazy na aplikaci, pokud to explicitně neopodmínkujete v tovární metodě.
 
-#### Zapnutí auto-inicializace
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
+### Zapnutí auto-inicializace
 
 Tímto označením jakékoliv vlastnosti s jakýmkoliv modifikátorem přístupu můžeme automaticky
-inicializovat dané vlastnosti do jejich definovaných typů. Tato funkcionaliza se však neděje vždy,
-protože stojí nějaký procesní čas a proto je pro zapnutí této magie třeba nastavit v aktuálím 
-kontextu controlleru vlastnost `$controller->autoInitProperties = TRUE`, která má jinak hodnotu `FALSE`.
+inicializovat dané vlastnosti do jejich definovaných typů. Tato funkcionalita se však neděje vždy,
+protože stojí nějaký procesní čas a proto je pro zapnutí této magie třeba nastavit v aktuálním 
+kontextu controlleru vlastnost `$controller->autoInitProperties = TRUE`, která má jinak výchozí hodnotu `FALSE`.
 
 Detailní podoba těchto automatických inicializací je v `\MvcCore\Controller::autoInitializeProperties();`.
 
-#### Co lze automaticky inicializovat
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
+### Co lze automaticky inicializovat
 
 Je možné takto instancovat automaticky objekty, které mají veřejnou statickou metodu `ClassName::CreateInstance();`
 vracející svoji novou instanci nebo které mají jednoduše prázdný konstruktor nebo konstruktor, 
@@ -147,7 +201,11 @@ je instance této inicializované vlastnosti automaticky zaregistrivána jako su
 kontextu controlleru a takový sub-controller je pak automaticky vyřizován ve standardním životním cyklu frameworku.
 Registrace sub-controlleru se interně provádí pomocí `$controller->AddChildController($subController);` automaticky.
 
-#### Tovární metody auto-inicializace
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
+### Tovární metody auto-inicializace
 Pokud potřebujeme vyrobit instanci ale předat ji nějaké parametry konstruktoru nebo 
 ji po inicializaci vždy nějak nastavit, můžeme využít toho, že proces automatické inicializace 
 vlastností controlleru nejprve hledá tovární metody v kontextu controlleru a pokud existují,
@@ -219,7 +277,11 @@ Starší zápis pak vypadá takto:
     protected $registerForm;
 ```
 
-#### Více továrních metod a pořadí
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
+### Více továrních metod a pořadí
 Pokud má controller více vlastností, které je třeba automaticky inicializovat a je mezi nimi nějaká provázanost,
 potřebujeme vyřešit, která tovární metoda se zavolá dříve, aby další mohla počítat již s existencí nějakého objektu.
 Pro tyto případy má PHP atribut `AutoInit` druhý parametr a to je celé číslo pro případné pořadí.
@@ -275,7 +337,11 @@ Starší zápis pak vypadá takto:
     protected $grid;
 ```
 
-#### Automatická inicializace versus Dependency Injection pattern
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
+### Automatická inicializace versus Dependency Injection pattern
 
 Tuto problematiku standardně řeší jakýkoliv Dependency Injection container, který automaticky
 vyřeší závoslosti a co je třeba volat první a poslední.
@@ -283,22 +349,45 @@ vyřeší závoslosti a co je třeba volat první a poslední.
 MvcCore záměrně neimplementuje Dependency Injection design pattern a maximálně jde 
 způsobem této automatické inicializace. Je to z následujících důvodů:
 - I když DI container používá cache, stojí další procesní čas,
-- DI potřebuje další konfiguraci => další tooling => další know how navíc pro start práce,
-- MvcCore nepracuje asynchronně a pro práci s modely se využívá design pattern Active Record.
+- DI potřebuje více kódu a konfigurace => další tooling => další know how navíc pro start práce,
+- MvcCore nepracuje asynchronně a pro práci s modely se využívá design pattern Active Record,
+  blokový kód a co nejjednodušší přístup.
+  
+Vývojář chce programovat nebo vydělávat pěníze? Chce vydělávat peníze tak, aby ho práce bavila
+a aby denně neluštil ošklivý kód. MvcCore je navrženo tak, aby nevznikali dlouhé třídy,
+kde nelze najít pohodlně závislost. Každá controller, model či cokoliv jiného
+lze i v sebesložitější aplikaci strukturovat tak, aby to bylo v rámci doporučení coding standards.
 
 Dependency injection přináší pouze syntaktickou pohodu. I testování nebo více
 databázových serverů je standardně možné řešit jinak než pomocí DI. 
 
+V praxi se setkávám spíše s testováním celého funkčního výsledku.
+Unit testing je sice krásná věc, ale já potřebuji vědět, zda se uživatel
+přihlásí, zda autocomplete napoví, zda se objednávka odešle apod.
+Což není jen kód v PHP a jedné třídě. Proto raději preferuji Selenium testování.
+
+Navíc vytváření controllerů nebo modelů lze jakkoliv svobodně rozšířit zdokumentovaným způsobem.
+Pokud někdo chce implementovat Dependency Injection design pattern v MvcCore,
+je to velmi snadno řešitelné v rámci aplikace, nebo si na to vývojář může napsat velmi 
+jednoduchou extenzi. Taková je filosofie frameworku - neklást překážky a moci svobodně tvořit.
+
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
 
 ## Provolání `Init()` metody na všech dětech
 Zde nejsou myšleny děti jako potomci tříd, ale jako děti controlleru přidané 
 pomocí `$controller->AddChildController($subController);`.
 
 Pokud využíváme automatickou inicializaci pro sub-controllery (formuláře 
-nebo datagridy jsou také jen rozšíření controlleru), je třeba i na nich zavolat 
+nebo DataGridů, což jsou také jen rozšíření controlleru), je třeba i na nich zavolat 
 standardní metodu `$subcontroller->Init();`, aby i v nich proběhl životní cyklus
 controlleru tak jako jinde. Právě toto zavolání `Init()` metody na sub-controllerech 
 řeší volání rodičovské metody `parent::Init();`.
+
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
 
 ---
 

@@ -1,15 +1,19 @@
 # Vlastní handlery klíčových událostí
 
+## Obsah
+- [**Milníky zpracování a vlastní handlery**](#milníky-zpracování-a-vlastní-handlery)
+- [**Handlery zpracování požadavku**](#handlery-zpracování-požadavku)
+- [**Handlery startu session**](#handlery-startu-session)
+
+## Milníky zpracování a vlastní handlery
 Zpracování HTTP dotazu se děje v těchto hlavních milnících, které jdou obvykle za sebou v pořadí níže. Někdy se může pořadí lišit, pokud dojde k nějaké vyjímce nebo např. přesměrování, pak mohou být některé milníky vynechány a zpracování http požadavku může přeskočit k bodu 5. a pokračovat dále.
 1. [**inicializace v `Bootstrap.php`**](./app-start.md#bootstrapphp),
 2. [**routování dotazů**](./app-dispatch.md#nalezení-routy-požadavku),
 3. [**vytvoření controlleru**](./app-dispatch.md#vytvoření-instance-controlleru),
-4. [**vyřizování controlleru**](./app-dispatch.md#vyřízení-životního-cyklu-controlleru) a [renderování],
-5. [odeslání HTTP hlaviček],
-6. [odeslání odpovědi], 
-7. [**ukončení**](./app-dispatch.md#ukončení-požadavku).
-
-TODO: všem odrazkam přidat odkazy
+4. [**vyřizování controlleru**](../controller/lifecycle.md) a [**renderování**](../rendering/README.md),
+5. [**odeslání HTTP hlaviček**](../rendering/response-sending.md#odeslání-http-hlaviček),
+6. [**odeslání odpovědi**](../rendering/response-sending.md#odeslání-těla-odpovědi), 
+7. [**ukončení požadavku a odeslání odpovědi**](./app-dispatch.md#ukončení-požadavku-a-odeslání-odpovědi).
 
 Mezi každý milník lze do aplikace přidat vlastní handler(y) a proces zpracování požadavku kdykoliv dokončit dříve (odeslání cache obsahu nebo přesměrování uživatele) nebo ukončit úplně.
 
@@ -19,6 +23,11 @@ Tyto handlery mohou být přidány kdykoliv při běhu aplikace, pokud k milník
 
 Více handlerů přidávaných do stejného místa zpracování požadavku lze mezi sebou číselně prioritizovat. Pokud dojde k zařazení handleru se stejným číslem (nebo bez čísla), rozhoduje pořadí inicializace handleru.
 
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
+## Handlery zpracování požadavku
 Do zpracování požadavku lze přidat tyto handlery:
 ```php
 // mezi milníky 1. a 2. - po inicializaci objektů aplikace, před routováním:
@@ -43,6 +52,11 @@ $app->AddPostDispatchHandler(callable $handler, ?int $priorityIndex = NULL): \Mv
 $app->AddPostTerminateHandler(callable $handler, ?int $priorityIndex = NULL): \MvcCore\Application;
 ```
 
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
+## Handlery startu session
 Je možné přidat i ještě tyto dva speciální handlery pro start session.
 Oproti předchozím handlerům ale není jisté, kdy přesně se spustí, neboď jejich
 spuštění závisí na tom, která část procesovaného kódu aplikace si zrovna řekne 
@@ -72,6 +86,10 @@ function (\MvcCore\IRequest $request, \MvcCore\IResponse $response): bool|void {
 ```
 
 Handlery lze prakticky jakkoliv ovlivnit průběh zpracování. Buďte s nimi však opatrní a s jejich používání šetřete. Spouštějí se totiž pro vyřízení všech požadavků aplikace a při neopatrném použití mohou negativně působit na výkon celé aplikace.
+
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
 
 ---
 

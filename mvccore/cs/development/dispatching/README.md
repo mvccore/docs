@@ -19,12 +19,12 @@ Cestu průchodu zpracování požadavku lze rozdělit do zhruba tří oblastí:
 - [**Renderování a odesílání**](./rendering/README.md)
   - [**Módy renderování**](./rendering/rendering-modes.md)
   - [**Renderování šablon**](./rendering/views-rendering.md)
-  - [**Základní view helpery**](./rendering/view-helpers.md)
-  - [**Escapování**](./rendering/escaping.md)
-  - [**Manuální a automatický výstup controlleru**](./rendering/controller-output.md)
+  - [**Proměnné šablon**](./rendering/view-variables.md)
+  - [**View helpery**](./rendering/view-helpers.md)
+  - [**Výstupy z controlleru, typy odpovědí**](./rendering/controller-output.md)
   - [**Přesměrování a ukončování**](./rendering/redirecting-and-termination.md)
   - [**Odeslání hlaviček a obsahu**](./rendering/response-sending.md)
-  - [**Uložení sezení**](./rendering/session-saving.md)
+  - [**Ukončení sezení**](./rendering/session-saving.md)
 
 ---
 

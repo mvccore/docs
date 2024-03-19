@@ -1,5 +1,12 @@
 # Příprava renderování controlleru
 
+## Obsah
+- [**Úvod**](#obsah)
+- [**Příklad**](#příklad)
+- [**Volání rodičivské metody**](#volání-rodičivské-metody)
+- [**Vlastní vytvoření view objektu šablony**](#vlastní-vytvoření-view-objektu-šablony)
+
+## Úvod
 Příprava renderování je jednoduchý proces, kdy vzniká instance vykreslovací šablony `$controller->view`.
 
 Vykreslovací šablona v této metodě nevzniká pro dotazy volané AJAXem, kdy je hodnota `$controller->ajax` 
@@ -16,6 +23,11 @@ Název této metody je odvozen z toho, že dispatching controlleru je předevš�
 nějaké akce controlleru + její následné vyrenderování. Příprava před touto hlavní 
 a nejobvyklejší činností controlleru se tak nazývá `PreDispatch()`.
 
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
+## Příklad
 Tato metoda je volána v controlleru pro všechny definované akce. Například pokud má controller následující
 akce, metoda `PreDispatch()` se zavolá před každou z nich, ať už se dotazuji na jednu nebo druhou URL.
 Jde o metodu, která řeší inicializaci objektů pro všechny společné věci všech akcí v controlleru v okamžiku, 
@@ -56,13 +68,18 @@ class Product extends \MvcCore\Controller {
 }
 ```
 
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
+## Volání rodičivské metody
 Controller má automaticky rozšířením třídy `\MvcCore\Controller` tuto metodu implementovanou od předka.  
 Pokud chceme něco k této mětodě přidat, je nutné vždy volat stejně pojmenovanou metodu rodičovské třídy.
 Rodičovskou metodu bychom měli volat ideálně jako první statement v metodě `PreDispatch()`.
 
 Obvykle slouží metoda `PreDispatch()` v základních controllerech k tomu, abychom 
-do view šablony naincializovali všechny proměnné používané v layout šablonách nebo 
-používané opakovaně ve většině šablon akcí:
+do již inicializované view šablony nastavili všechny proměnné používané opakovaně 
+v šablonách akcí a v layout šablonách:
 ```php
 <?php
 
@@ -80,9 +97,17 @@ class Base extends \MvcCore\Controller {
 }
 ```
 
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
+## Vlastní vytvoření view objektu šablony
 Zavoláním rodičovské metody `parent::PreDispatch();` zařídíme vytvoření view za zmíněných podmínek.
 Pokud chceme vytváření objektu view také upravit, je třeba podědit a rozšířit metodu 
-`\MvcCore\Controller::createView(bool $actionView = TRUE): \MvcCore\View;`:
+`\MvcCore\Controller::createView(bool $actionView = TRUE): \MvcCore\View;`.
+Její první parametr s hodnotou `TRUE` vyjadřuje, zda se vytváří view objekt pro šablonu akce.
+Pokud má hodnotu `FALSE`, vytváří se view objekt pro šablonu layoutu.
+Více o šablonách akcí a layoutu v sekci [**Renderování šablon**](../rendering/views-rendering.md).
 ```php
 <?php
 
@@ -97,6 +122,10 @@ class Base extends \MvcCore\Controller {
     }
 }
 ```
+
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
 
 ---
 

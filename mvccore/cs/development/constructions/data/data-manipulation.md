@@ -1,0 +1,1 @@
+# Manipulace s daty

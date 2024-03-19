@@ -3,9 +3,10 @@
 ## Obsah
 - [**Routování pomocí query stringu**](#routování-pomocí-query-stringu)
 - [**Routování pomocí přepisovaných adres (mod_rewrite)**](#routování-pomocí-přepisovaných-adres-url-rewrite)
-- [**Routování z CLI**](#routovani-z-cli)
+- [**Routování z CLI**](#routování-z-cli)
 - [**Výchozí controller a akce**](#výchozí-controller-a-akce)
-- [**Definování rout v routeru**](#definovani-rout-v-routeru)
+- [**Definování rout v routeru**](#definování-rout-v-routeru)
+  - [**Seskupování rout a optimalizace**](#seskupování-rout-a-optimalizace)
   - [**Definice cesty**](#definice-cesty)
   - [**Nepovinné sekce URL**](#nepovinné-sekce-url)
   - [**Definice controlleru a akce**](#definice-controlleru-a-akce)
@@ -14,6 +15,9 @@
   - [**Výchozí hodnoty parametrů**](#výchozí-hodnoty-parametrů)
   - [**Omezení parametrů**](#omezení-parametrů)
 - [**Další features routeru**](#další-features-routeru)
+  - [**Kanonické přesměrovávání**](#kanonické-přesměrovávání)
+  - [**Koncové lomítko v URL adresách**](#koncové-lomítko-v-url-adresách)
+  - [**Dynamické načítání rout z databáze**](#dynamické-načítání-rout-z-databáze)
 - [**Rozšířené routery**](#rozšířené-routery)
 - [**Ukládání rout do cache**](#ukládání-rout-do-cache)
 
@@ -64,6 +68,12 @@ kde si ji MvcCore framework přečte a na základě tohoto řetězce postaví in
 Zachycená routa má pak v sobě od vývojáře definovaný controller a akci, 
 kam požadavek v daném tvaru směrovat a jaká controller a volání akce vytvořit. Případně má definované chování, jak si hodnoty pro controller a akcí získat.
 
+Pokud má routa fixne uvedený controller nebo akci a přesto je v URL adrese query string
+obsahující parametr `controller` nebo `action`, výsledný controller nebo akce je
+prioritne zvolena podle query stringu. Což nese samozřejmě nutnost pohlídat si 
+v každé akci, zda mám všechny parametry, které budu v dalších činnostech nutně potřebovat,
+aby nedošlo k chybě. Ale to by vývojář měl dělat vždy zcela automaticky, i kdyby tato priorita ve frameworku nebyla.
+
 Definování rout se obvykle provádí v souboru `Bootstrap.php` jako jedna 
 z posledních inicializací aplikace, více v sekci [**`Bootstrap.php`**](./app-start.md#bootstrapphp).
 
@@ -99,10 +109,10 @@ Níže je seznam výchozích hodnot pro výchozí controllery a akce v MvcCore:
 - **Výchozí contoller** - `Index` (`./App/Controllers/Index.php`):
   - Controller je vyřizován, pokud není určen controller pomocí query stringu 
     nebo pokud nemá zachycená rewrite routa definován žádný controller.
+  - Controller je také vyřizován, pokud dojde k neošetřené vyjímce v aplikaci
+    a pokud controller má definované chybové akce k tomu určené.
 - **Výchozí akce** - `Index` (`$controller->IndexAction();`):
   - Akce je vyřizována v jakémkoliv controlleru, pokud není v query stringu nebo zachycené routě uvedena žádná jiná akce.
-- **Chybový controller** - `Index` (`./App/Controllers/Index.php`):
-  - Controller je vyřizován, pokud dojde k neošetřené vyjímce v aplikaci.
 - **Chybová akce 404** - `NotFound` (`$errorController->NotFoundAction();`):
   - Akce je vyřizována na chybovém controlleru, pokud je kód neošetřené vyjímky 404.
 - **Obecná chybová akce**  - `Error` (`$errorController->ErrorAction();`):
@@ -146,19 +156,24 @@ $router = $app->GetRouter();
 Poté už můžeme definovat routy některým z následujících způsobů:
 ```php
 $router->AddRoutes([
-    'Index:Index'         => [
-        'match'           => '#^/(index\.php)?$#',
-        'reverse'         => '/',
-    ],
+    // nejjednodušší zápis routy
+    'Index:Index'         => '/',
     'CdCollection:Index'  => '/albums',
     'CdCollection:Create' => '/create',
+    // příklad routy s omezením metody
     'CdCollection:Submit' => [
         'pattern'         => '/save',
         'method'          => 'POST'
     ],
+    // příklad routy s parametrem
     'CdCollection:Edit'   => [
         'pattern'         => '/edit/<id>',
         'constraints'     => ['id' => '\d+'],
+    ],
+    // příklad redirect routy
+    'index-php'           => [
+        'match'           => '#^/index\.php$#',
+        'redirect'        => 'Index:Index'
     ]
 ]);
 ```
@@ -187,6 +202,7 @@ Routery i routy mají nepřeberné možnosti konfigurace, doporučuji si přeč�
 - Přidávání, odebírání a nastavování rout do routeru:
   - [**`\MvcCore\Router\RouteMethods`**](https://github.com/mvccore/mvccore/blob/master/src/MvcCore/Router/RouteMethods.php)
 
+### Seskupování rout a optimalizace
 Routy je možné seskupovat do skupin podle první sekce mezi lomítky. 
 První sekce mezi lomítky jsou znaky v cestě URL od prvního do druhého nekoncového lomítka:
 ```php
@@ -409,9 +425,20 @@ nebo přejmenovává celý controller nebo jeho akce. Poté je nutné se změně
 kde se změněný název controlleru nebo akce vyskytl. Není však třeba již procházet kód a hledat 
 výskyty volání metody `$controller->Url()`, kde se může vyskytovat volání refactorovaného controlleru nebo akce.
 
-Název routy může být libovolný string. Obvykle se jedná o lowercase název, kde jsou slova
+Název routy může být libovolný string (vyjma systémových názvů níže). Obvykle se jedná o lowercase název, kde jsou slova
 oddělena podtržítkem. Název routy zůstává pouze na serveru v routeru a nikdy není možné ho vidět od uživatele,
 pokud tak vývojář explicitně neučiní.
+
+Některé názvy rout jsou využívány systémem, proto prosím nepoužívejte ve svých názvech rout 
+systémové názvy, které najdete v interface [**`\MvcCore\Router\IConstants`**](https://github.com/mvccore/mvccore/blob/master/src/MvcCore/Router/IConstants.php). Jinak byste je museli přepisovat jako konstanty na extendovaném routeru.
+
+Systémové názvy rout jsou následující:
+- `default` (`$router::DEFAULT_ROUTE_NAME`):
+  - název routy vytvářené automaticky při routování pomocí controlleru a akce v query stringu,
+- `not_found` (`$router::DEFAULT_ROUTE_NAME_NOT_FOUND`):
+  - název routy vytvářené automaticky při chybové stránce nenalezeného zdroje (chyba 404),
+- `error` (`$router::DEFAULT_ROUTE_NAME_ERROR`):
+  - název routy vytvářené automaticky při obecné chybové stránce.
 
 
 &nbsp;  
@@ -488,12 +515,55 @@ Pokud tedy URL nevyhovuje omezení parametru v `constraints`, není routa ani za
 [↑ Obsah](#obsah)  
 &nbsp;&nbsp; 
 
-### Další features routeru
+### Univerzální routy
+Je možné vytvořit routu, která bude zachycovat nějaký nejčastěji používaný styl routování Vašich controllerů.
+Nebo lze vytvořit routu, která bude zachycovat celou cestu v URL a podle ní získávat data např. z databáze.
+Obojí je celkem časté a znamená to zařadit routu na poslední místo, kdy žádné speciálnější chování nevyhovuje
+a kdy je tedy třeba použít nějaké univerzální.
 
+**Univerzální MVC routa**
+```php
+$router->AddRoute([
+    'name'        => 'mvc',
+    'pattern'     => '/<controller>/<action>[/<id>]',
+	'constraints' => [
+        'id'      => '\d+'
+    ]
+]);
+```
+
+**Univezální "catch all" routa**
+```php
+$router->AddRoute([
+    'name'        => 'docs',
+    'controller'  => 'Documents',
+    'pattern'     => '<path>',
+    'constraints' => [
+        'path'    => '.*'
+    ]
+]);
+```
+
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
+## Další features routeru
+Router v jádře MVC nabízí několik dalších funkcí zmíněných níže 
+a i několik malých, které jistě budou zřejmé z PHP Docs setter funkcí samotnéh routeru.
+
+### Kanonické přesměrovávání
 Router umí přesměrovávat více tvarů adres na kanonickou (tedy jedinečnou, primární) URL.
-Tuto volmu je možné vypnout pomocí `$router->SetAutoCanonizeRequests(bool $autoCanonizeRequests): \MvcCore\Router;`.
-Ve výchozím stavu je tato vlastnost zapnutá a router přesměrovává na kanonické URLs.
+Při nalezení odpovídající routy zkouší router sestavit s routou a dotazovanými parametry
+svoji aktuální URL adresu. Pokud je jiná než skutečně dotazovaná, přesměruje automaticky 
+klienta na primární verzi URL adresy. Tuto feature je možné vypnout pomocí:
+```php
+$router->SetAutoCanonizeRequests(bool $autoCanonizeRequests): \MvcCore\Router;
+```
+...ale není to doporučované. Ve výchozím stavu je tato vlastnost zapnutá a router 
+přesměrovává na kanonické URL adresy.
 
+### Koncové lomítko v URL adresách
 Router také umí chování pro koncové lomítko v URL:
 ```php
 // router vždy přesměruje na verzi URL bez koncového lomítka (výchozí stav):
@@ -506,6 +576,7 @@ $router->SetTrailingSlashBehaviour(\MvcCore\IRouter::TRAILING_SLASH_BENEVOLENT):
 $router->SetTrailingSlashBehaviour(\MvcCore\IRouter::TRAILING_SLASH_ALWAYS): \MvcCore\Router;
 ```
 
+### Dynamické načítání rout z databáze
 Router si také umí načítat URL např. z databáze při zachycování routy podle URL i při sestavování routy na URL:
 ```php
 $router->SetPreRouteMatchingHandler(

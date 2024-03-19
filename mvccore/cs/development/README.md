@@ -10,6 +10,17 @@
 - [**Cesta zpracování v Controlleru**](./dispatching/controller/README.md)
 - [**Vykreslení a odeslání klientovi**](./dispatching/rendering/README.md)
 
+### [**Konstrukce aplikace**](./constructions/README.md)
+- [**Vytváření URL adres**](./constructions/urls/README.md)
+- [**Controllery a sub-controllery**](./constructions/controller/README.md)
+
+TODO:
+- [**Request a Response**](./constructions/req-res/README.md)
+- [**Data, modely a databáze**](./constructions/data/README.md)
+- [**Konfigurace a prostředí**](./constructions/config-evn/README.md)
+- [**Debugging a logování**](./constructions/debug-log/README.md)
+- [**Sezení a jmenné prostory**](./constructions/session/README.md)
+
 ### Popis fungování jádra MVC
 - Hlavní supertřídy jádra:
   - [**Application**](./core/application/README.md)

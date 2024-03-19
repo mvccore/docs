@@ -1,0 +1,1 @@
+# SQL dotazy do databáze

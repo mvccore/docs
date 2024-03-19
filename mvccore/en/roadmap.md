@@ -9,6 +9,8 @@
     - `AddActionHandler()`,
     - `AddTerminateHandler()`.
 
+- Automatic generation of type classes for display for hinting in the IDE.
+
 - Router:
   - In addition to the canonical redirect feature, it would be good to implement some developer switch (usually turned off) that would check when creating URLs using `GetUrl()` whether the target controller/action/route exists and, if necessary, log somewhere or throw an exception.
 

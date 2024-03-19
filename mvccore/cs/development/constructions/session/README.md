@@ -1,0 +1,1 @@
+# Sezení a jmenné prostory

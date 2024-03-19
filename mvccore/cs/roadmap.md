@@ -9,6 +9,8 @@
     - AddActionHandler(), 
     - AddTerminateHandler().
 
+- Automatické generování typových tříd pro views pro napovídání v IDE.
+
 - Router:
   - Kromě feature canonical redirect by bylo dobré implementovat i nějaký vývojářský 
     přepínač (standardně vypnutý), ktery by při vytváření URL pomocí `GetUrl()` kontroloval, 

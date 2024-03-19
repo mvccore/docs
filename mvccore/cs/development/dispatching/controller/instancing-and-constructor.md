@@ -1,5 +1,11 @@
 # Instancování a konstruktor controlleru
 
+## Obsah
+- [**Úvod**](#úvod)
+- [**Možnosti rozšíření chování**](#možnosti-rozšíření-chování)
+- [**Setup klíčových properties**](#setup-klíčových-properties)
+
+## Úvod
 Interface controlleru nedefinuje žádný `__constructor()` třídy controller.
 Controller je instancí aplikace vytvořen vždy přes staickou metodu `CreateInstance()`:
 ```php
@@ -12,12 +18,28 @@ $controller = $controllerClass::CreateInstance();
 Popisovaný kód i kód níže na této stránce je k dispozici
 ve třídě a mětodě `\MvcCore\Application` v metodě [**`$app->CreateController()`**](https://github.com/mvccore/mvccore/blob/master/src/MvcCore/Application/Dispatching.php#L197).
 
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
+
 ## Možnosti rozšíření chování
 Pokud tedy controller pro svůj běh potřebuje cokoliv navíc od standardního 
 chování, může si vývojář vytvořit svoji metodu `__constructor()` v implementaci
 konkrétního controlleru a tam si vše navíc inicializovat do properties controlleru.
 Nebo je možné podědit statickou metodu [**`\MvcCore\Controller::CreateInstance()`**](https://github.com/mvccore/mvccore/blob/master/src/MvcCore/Controller/Dispatching.php#L26) 
 a i zde si implementovat vlastní, klidně i globální chování pro controllery v aplikaci.
+
+Tato metoda je perfektní způsob, jak implementovat Dependency Injection pattern 
+pro controllery, pro jejich formuláře nebo datagridy. Stejně tak pro modely, 
+které nemají žádnou povinnou cestu, jak by měli být instancovány apod.
+
+Pokud vývojář chce mít DI design pattern v MvcCore, může využít jakoukoliv DI knihovnu,
+kterou inicializuje v `Bootstrap.php` a poté zde začně tvořit první instanci controlleru,
+která tvoří vše ostatní.
+
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
 
 ## Setup klíčových properties
 Aplikace po vytvoření nové instance controlleru nastaví do controlleru 
@@ -42,6 +64,10 @@ $controller->SetResponse(\MvcCore\Response $response): \MvcCore\Controller;
 // vytváření URL adres v controlleru a view:
 $controller->SetRouter(\MvcCore\Router $router);: \MvcCore\Controller;
 ```
+
+&nbsp;  
+[↑ Obsah](#obsah)  
+&nbsp;&nbsp; 
 
 ---
 
