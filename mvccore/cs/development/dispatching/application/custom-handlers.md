@@ -19,7 +19,7 @@ Mezi každý milník lze do aplikace přidat vlastní handler(y) a proces zpraco
 
 Vlastní handlery zpracování požadavku jsou tak cestou, jak pohodlně ovlivnit a upravit průběh zpracování, aniž by bylo třeba třídy `\MvcCore\Application` a `\MvcCore\Response` extendovat, přeprogramovat a celému procesu detailně rozumět.
 
-Tyto handlery mohou být přidány kdykoliv při běhu aplikace, pokud k milníku, ke které se vztahují ještě nedošlo. Pokud přidám handler pozdě, nevykoná se. Proto je dobré vlastní handlery zpracování požadavku přidávat v inicializaci v `Bootstrap.php`.
+Tyto handlery mohou být přidány kdykoliv při běhu aplikace, pokud k milníku, ke kterému se vztahují ještě nedošlo. Pokud přidám handler pozdě, nevykoná se. Proto je dobré vlastní handlery zpracování požadavku přidávat v inicializaci v `Bootstrap.php`.
 
 Více handlerů přidávaných do stejného místa zpracování požadavku lze mezi sebou číselně prioritizovat. Pokud dojde k zařazení handleru se stejným číslem (nebo bez čísla), rozhoduje pořadí inicializace handleru.
 
@@ -93,9 +93,11 @@ Handlery lze prakticky jakkoliv ovlivnit průběh zpracování. Buďte s nimi v�
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Routování dotazů**](./request-routing.md)  
-[další: **Cesta zpracování v controlleru**](../controller/README.md)  
+[◀ předchozí: **Routování dotazů**](./request-routing.md)  
+[▶ další: **Cesta zpracování v controlleru**](../controller/README.md)  
 
 </div>

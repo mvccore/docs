@@ -31,7 +31,7 @@ a nejobvyklejší činností controlleru se tak nazývá `PreDispatch()`.
 Tato metoda je volána v controlleru pro všechny definované akce. Například pokud má controller následující
 akce, metoda `PreDispatch()` se zavolá před každou z nich, ať už se dotazuji na jednu nebo druhou URL.
 Jde o metodu, která řeší inicializaci objektů pro všechny společné věci všech akcí v controlleru v okamžiku, 
-kdy již existuje object `$controller->view`, který v inicializačních metodách neexistuje:
+kdy již existuje objekt `$controller->view`, který v inicializačních metodách neexistuje:
 ```php
 <?php
 
@@ -74,7 +74,7 @@ class Product extends \MvcCore\Controller {
 
 ## Volání rodičivské metody
 Controller má automaticky rozšířením třídy `\MvcCore\Controller` tuto metodu implementovanou od předka.  
-Pokud chceme něco k této mětodě přidat, je nutné vždy volat stejně pojmenovanou metodu rodičovské třídy.
+Pokud chceme něco k této metodě přidat, je nutné vždy volat stejně pojmenovanou metodu rodičovské třídy.
 Rodičovskou metodu bychom měli volat ideálně jako první statement v metodě `PreDispatch()`.
 
 Obvykle slouží metoda `PreDispatch()` v základních controllerech k tomu, abychom 
@@ -129,9 +129,11 @@ class Base extends \MvcCore\Controller {
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Inicializace akcí controlleru**](./action-initialization.md)  
-[další: **Volání akcí controlleru**](./action.md)  
+[◀ předchozí: **Inicializace akcí controlleru**](./action-initialization.md)  
+[▶ další: **Volání akcí controlleru**](./action.md)  
 
 </div>

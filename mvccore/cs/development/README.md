@@ -56,9 +56,11 @@ TODO:
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **MvcCore framework**](../README.md)  
-[další: **Založení projektu**](./first-steps/new-project/README.md)
+[◀ předchozí: **MvcCore framework**](../README.md)  
+[▶ další: **Založení projektu**](./first-steps/new-project/README.md)
 
 </div>

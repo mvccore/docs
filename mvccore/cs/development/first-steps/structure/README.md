@@ -28,6 +28,7 @@ App                           # povinná, složka obsahující strukturu aplika�
     'Bootstrap.php'           # volitelná icializační třída
 Var                           # volitelná, složka s dočasnými daty
     Logs                      # volitelná, složka se zalogovanými daty a vyjímkami
+                              # tato složka by měla mít oprávnění pro zápis
 www                           # povinná, složka s document rootu web serveru
     'index.php'               # povinný, startovní script aplikace
 vendor                        # volitelná, složka composeru s balíčky třetích stran
@@ -43,17 +44,19 @@ vendor                        # volitelná, složka composeru s balíčky třet�
 Standardní webová aplikace v MvcCore má obvykle rozšířenější strukturu složek.
 Navíc zde mohou být následující volitelné složky, podle povahy aplikace:
 ```sh
-'./App/Forms'         # složka se strukturou tříd formulářů,
-'./App/Models'        # složka se strukturou tříd modelů,
-'./App/Routers'       # složka s extendovanou třídou routeru, rout nebo jejich továren,
-'./App/Views/Helpers' # složka pro vlastní pomocné funkcí šablon,
-'./App/Views/Forms'   # složka se strukturou případných šablon formulářů,
+./App/Forms           # složka se strukturou tříd formulářů,
+./App/Models          # složka se strukturou tříd modelů,
+./App/Routers         # složka s extendovanou třídou routeru, rout nebo jejich továren,
+./App/Views/Helpers   # složka pro vlastní pomocné funkcí šablon,
+./App/Views/Forms     # složka se strukturou případných šablon formulářů,
 './App/config.ini'    # volitelný systémový config
-'./Var/Tmp'           # složka s ostatními dočasnými aplikačními soubory,
-'./www/static/css'    # složka s kaskádovými styly,
-'./www/static/js'     # složka s TypeScript zdrojovými soubory (zde leží `tsconfig.json`),
-'./www/static/ts'     # složka s TypeScript zdrojovými soubory (zde leží `tsconfig.json`),
-'./www/static/tmp'    # složka s dočasnými skupinovými *.js soubory nebo *.d.ts soubory z jiných composer balíčků,
+./Var/Tmp             # složka s ostatními dočasnými aplikačními soubory,
+                      # tato složka by měla mít oprávnění pro zápis,
+./www/static/css      # složka s kaskádovými styly,
+./www/static/js       # složka s TypeScript zdrojovými soubory (zde leží `tsconfig.json`),
+./www/static/ts       # složka s TypeScript zdrojovými soubory (zde leží `tsconfig.json`),
+./www/static/tmp      # složka s dočasnými skupinovými *.js soubory nebo *.d.ts soubory z jiných composer balíčků,
+                      # tato složka by měla mít oprávnění pro zápis 
 ```
 
 &nbsp;  
@@ -82,7 +85,9 @@ App                           # povinná, složka obsahující strukturu aplika�
 Libs                          # volitelná, složka s případně manuálně umístěnými knihovnami
 Var                           # volitelná, složka s dočasnými daty
     Logs                      # volitelná, složka se zalogovanými daty a vyjímkami
+                              # tato složka by měla mít oprávnění pro zápis
     Tmp                       # volitelná, složka s ostatními dočasnými aplikačními soubory
+                              # tato složka by měla mít oprávnění pro zápis
 www                           # povinná, složka s document rootu web serveru
     'index.php'               # povinný, startovní script aplikace
     static                    # volitelná, složka se statickým HTTP obsahem
@@ -90,6 +95,7 @@ www                           # povinná, složka s document rootu web serveru
         js                    # volitelná, složka s JavaScript soubory (možná výstupní složka pro TypeScript build)
         ts                    # volitelná, složka s TypeScript zdrojovými soubory (zde leží `tsconfig.json`)
         tmp                   # volitelná, složka s dočasnými skupinovými *.js soubory nebo *.d.ts soubory z jiných composer balíčků
+                              # tato složka by měla mít oprávnění pro zápis
 vendor                        # volitelná, složka composeru s balíčky třetích stran
 'composer.json'               # volitelný, config vyžadovaných balíčků třetích stran
 'composer.lock'               # volitelný, config nainstalovaných balíčků třetích stran
@@ -117,9 +123,9 @@ namespace App\Controllers;
 
 class Index extends \MvcCore\Controller {
 
-    public function IndexAction () {
+	public function IndexAction () {
 		$this->view->title = 'MvcCore Aplication';
-    }
+	}
 
 	public function NotFoundAction(){
 		$this->ErrorAction();
@@ -177,9 +183,11 @@ class Index extends \MvcCore\Controller {
 
 ---
 
+[▲ o úroveň výš](../../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Založení projektu**](../new-project/README.md)  
-[další: **Používání příkladů**](../examples/README.md)
+[◀ předchozí: **Založení projektu**](../new-project/README.md)  
+[▶ další: **Používání příkladů**](../examples/README.md)
 
 </div>

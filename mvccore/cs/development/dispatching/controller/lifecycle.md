@@ -27,9 +27,11 @@ Každý z těchto kroků životního cyklu controlleru je popsán v dalších ka
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Cesta zpracování v controlleru**](./README.md)  
-[další: **Instancování a konstruktor controlleru**](./instancing-and-constructor.md)  
+[◀ předchozí: **Cesta zpracování v controlleru**](./README.md)  
+[▶ další: **Instancování a konstruktor controlleru**](./instancing-and-constructor.md)  
 
 </div>

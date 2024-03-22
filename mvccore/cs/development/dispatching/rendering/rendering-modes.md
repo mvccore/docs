@@ -108,6 +108,9 @@ Pokud není aplikace nastavena jinak, výchozím chováním je obalení každéh
 Vykreslovací šablona layoutu je další nová instance třídy `\MvcCore\View`, která převezme totožný sklad 
 proměnných z šablony akce a vykreslí kolem výstupu akce další obsah.
 
+Pokud je v `$controller->layout` nastaveno `NULL`, šablona layoutu  
+se nevykresluje a výstup šablony akce je celé tělo odpovědi.
+
 Příklad šablony layoutu a celkového výstupu (těla odpovědi aplikace):
 ```php
 // ./App/Views/Layouts/layout.phtml:
@@ -290,9 +293,11 @@ Více o ukončování požadavku v sekci [**Průchod zpracování v aplikaci**](
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Renderování a odesílání**](./README.md)  
-[další: **Renderování šablon**](views-rendering.md/)  
+[◀ předchozí: **Renderování a odesílání**](./README.md)  
+[▶ další: **Renderování šablon**](views-rendering.md/)  
 
 </div>

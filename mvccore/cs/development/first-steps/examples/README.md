@@ -7,7 +7,7 @@ tak, jak je uvedeno v `README.md` a poté aktualizovat composer závislosti pomo
 Pokud příklady používají databázi, mají souborovou databázi v SQLite 
 a také soubory SQL dumpů pro jiné implementace databáze.
 
-Příklady se snaží být maximálně zpětně kompatibilní a jsou napsané co nejednodušeji, 
+Příklady se snaží být maximálně zpětně kompatibilní a jsou napsané co nejjednodušeji, 
 aby nebyla prezentace kódu zaplevelena věcmi, které mohou na první pohled mást.
 
 ## Klasické příklady
@@ -26,13 +26,15 @@ aby nebyla prezentace kódu zaplevelena věcmi, které mohou na první pohled m�
 - [Hello World - Portable](https://github.com/mvccore/example-helloworld-portable)
 - [Pig Latin Translator - Portable](https://github.com/mvccore/example-translator-portable)
 - [CD Collection - Portable](https://github.com/mvccore/example-cdcol-portable)
-- [Project BaAsic - Portable](https://github.com/mvccore/project-basic-portable)
+- [Project Basic - Portable](https://github.com/mvccore/project-basic-portable)
 
 ---
 
+[▲ o úroveň výš](../../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Struktura složek projektu**](../structure/README.md)  
-[další: **Zpracování HTTP dotazu**](../../dispatching/README.md)
+[◀ předchozí: **Struktura složek projektu**](../structure/README.md)  
+[▶ další: **Zpracování HTTP dotazu**](../../dispatching/README.md)
 
 </div>

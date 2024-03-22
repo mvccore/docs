@@ -66,11 +66,11 @@ kde si ji MvcCore framework přečte a na základě tohoto řetězce postaví in
 `\MvcCore\Request` podle které probíhá zachycení routy v momentě [**Routování požadavku**](./app-dispatch.md#nalezení-routy-požadavku).
 
 Zachycená routa má pak v sobě od vývojáře definovaný controller a akci, 
-kam požadavek v daném tvaru směrovat a jaká controller a volání akce vytvořit. Případně má definované chování, jak si hodnoty pro controller a akcí získat.
+kam požadavek v daném tvaru směrovat a jaký controller a volání akce vytvořit. Případně má definované chování, jak si hodnoty pro controller a akci získat.
 
-Pokud má routa fixne uvedený controller nebo akci a přesto je v URL adrese query string
+Pokud má routa fixně uvedený controller nebo akci a přesto je v URL adrese query string
 obsahující parametr `controller` nebo `action`, výsledný controller nebo akce je
-prioritne zvolena podle query stringu. Což nese samozřejmě nutnost pohlídat si 
+prioritně zvolena podle query stringu. Což nese samozřejmě nutnost pohlídat si 
 v každé akci, zda mám všechny parametry, které budu v dalších činnostech nutně potřebovat,
 aby nedošlo k chybě. Ale to by vývojář měl dělat vždy zcela automaticky, i kdyby tato priorita ve frameworku nebyla.
 
@@ -216,11 +216,11 @@ První sekce mezi lomítky jsou znaky v cestě URL od prvního do druhého nekon
 ```
 
 Práce routeru se tím významně urychlí,
-neboď router nespouští všechny regulární výrazy rout pro dotazovanou URL ale pouze regulární 
+neboť router nespouští všechny regulární výrazy rout pro dotazovanou URL ale pouze regulární 
 výrazy v rámci své skupiny. Pokud v URL není žádné první slovo ukončené nekončícím lomítkem,
 je název skupiny pro routu prázdný string.
 
-Je třeba takto seskupovat routy při přodávání do routeru manuálně:
+Je třeba takto seskupovat routy při přidávání do routeru manuálně:
 ```php
 $router
     ->AddRoutes([
@@ -238,7 +238,7 @@ $router
 ```
 
 Pořadí vykonávání regulárních výrazů je vždy dané podle pořadí přidání routy do routeru.
-Pokud se router rozhodně vykonat pouze regulární výrazy v nějaké skupině rout,
+Pokud se router rozhodne vykonat pouze regulární výrazy v nějaké skupině rout,
 je pořadí v rámci skupiny rout opět dané pořadím při přidávání rout do routeru.
 
 Nejčastější zápis je však ten nejkratší a to buď pomocí stringu nebo pole:-)
@@ -252,7 +252,7 @@ Nejčastější zápis je však ten nejkratší a to buď pomocí stringu nebo p
 Definice cesty rewrite routy slouží pro automatické vytvoření regulárního 
 výrazu pro zachycení aktuálně vyřizovaného požadavku podle URL a současně 
 pro automatické vytvoření tvaru routy, podle kterého se mají v aplikaci vytvářet adresy, 
-pokud chce danou routu někde použít a získat její URL adresu v aplikaci.
+pokud chceme danou routu někde použít a získat zpětně její URL adresu v aplikaci.
 
 ```php
 $router->AddRoutes([
@@ -276,7 +276,7 @@ To platí pro routu `CdCollection:Submit`.
 Pokud mi automatické vytvoření těchto dvou klíčových vlastností routy nevyhovuje, 
 mohu definovat routu pomocí vlastního regulárního výrazu a podle vlastního vzoru URL současně. 
 Regulární výraz v `match` slouží k zachycení routy podle dozatované URL a vzor URL 
-v `reverse` slouží jako vzor, ze kterého se má v aplikaci poskládat URL podle této routy:
+v `reverse` slouží jako vzor, ze kterého se má v aplikaci zpětně poskládat URL podle této routy:
 
 ```php
 $router->AddRoutes([
@@ -302,7 +302,7 @@ dotazy ve tvaru `/index.php`.
 Pro routu `Color:View` je pak také uveden vlastní regulární výraz,
 který umí zachytit jak americký tvar `color` tak anglický tvar `colour`:-). 
 Je pak ale třeba při použití parametrů v regulárním výrazu definovat i omezení pomocí `[0-9a-f]{6}`
-a není tak možné využít vlastnost `constraints`. Vlastní výrazy v routách jsou ale super:-)
+a není tak možné využít vlastnost `constraints`. Vlastní regulární výrazy v routách jsou ale super:-)
 
 &nbsp;  
 [↑ Obsah](#obsah)  
@@ -314,7 +314,7 @@ Cesta routy definovaná pomocí vlastnosti `pattern` může obsahovat libovolný
 nepovinných sekcí, neboli částí cesty. Nepovinnou část cesty uzavíráme do hranatých závorek.
 Hranaté závorky jsou tedy pro přímé používání v URL nevhodné, slouží pro označení volitelných sekcí cesty.
 (Pokud i přesto bylo nutné definovat hranaté závorky jako součást URL, je třeba routě definovat
-manuálně vlastnost `match` a `reverse`. Ve vlastnosti `match` bych tyto závorky escapovat jako `\[\]`).
+manuálně vlastnost `match` a `reverse`. Ve vlastnosti `match` se tyto závorky musí jako speciální znak regulárního výrazu escapovat `\[\]`, obdobně i ostatní speciální znaky jako `\-\(\)\<\>\{\}`).
 
 Nepovinné sekce URL se nejčastěji používají pro definici nepovinných parametrů.
 Ale lze je použít i jako volitelnou variantu cesty routy. Kanonická URL však bude ta bez volitelné sekce:
@@ -348,8 +348,8 @@ $router->AddRoutes([
 
 Definice controlleru a akce v routě může být definovaná pomocí vlastností `controller`, 
 `action` nebo dohromady pomocí souhrnné vlastnosti `controllerAction`. Pokud klíč v poli 
-předávaném do metody `$router->AddRoutes()` obsahuje znak dvojtecka `:` a ani controller 
-a ani ani nejsou v routě nijak specifikovány, je tento klíč použit jako hodnota pro vlastnost 
+předávaném do metody `$router->AddRoutes()` obsahuje znak dvojtecka `:` a ani `controller` 
+a ani `akce` nejsou v routě nijak specifikovány, je tento klíč použit jako hodnota pro vlastnost 
 routy `controllerAction`. Definici `controller` nebo `action` je možné v routě vynechat 
 a dodávat hodnotu pomocí parametru routy nebo pomocí query string parametru. 
 
@@ -423,7 +423,7 @@ jak si název URL v aplikaci jednoduše odvodit.
 Název routy je dobré mít vždy uveden především pro refactoring, kdy se často děje to, že se přesouvá
 nebo přejmenovává celý controller nebo jeho akce. Poté je nutné se změněným názvem změnit jen routu, 
 kde se změněný název controlleru nebo akce vyskytl. Není však třeba již procházet kód a hledat 
-výskyty volání metody `$controller->Url()`, kde se může vyskytovat volání refactorovaného controlleru nebo akce.
+výskyty volání metody `$router->Url()`, kde se může vyskytovat volání refactorovaného controlleru nebo akce.
 
 Název routy může být libovolný string (vyjma systémových názvů níže). Obvykle se jedná o lowercase název, kde jsou slova
 oddělena podtržítkem. Název routy zůstává pouze na serveru v routeru a nikdy není možné ho vidět od uživatele,
@@ -550,7 +550,7 @@ $router->AddRoute([
 
 ## Další features routeru
 Router v jádře MVC nabízí několik dalších funkcí zmíněných níže 
-a i několik malých, které jistě budou zřejmé z PHP Docs setter funkcí samotnéh routeru.
+a i několik malých, které jistě budou zřejmé z PHP Docs setter funkcí samotného routeru.
 
 ### Kanonické přesměrovávání
 Router umí přesměrovávat více tvarů adres na kanonickou (tedy jedinečnou, primární) URL.
@@ -608,7 +608,7 @@ Ve zkratce je možné nainstalovat si router, který řeší:
 - lokalizaci aplikace,
 - verzi aplikace pro mobily nebo počítače,
 - více domén v aplikaci,
-- vše výše uvedené rlzně kombinované.
+- vše výše uvedené různě kombinované.
 
 Seznam rozšíření routeru MvcCore je k nalezení v sekci [**Seznam extenzí a repozitářů**](../../../extensions.md#rozšíření---routery).
 
@@ -619,7 +619,8 @@ Seznam rozšíření routeru MvcCore je k nalezení v sekci [**Seznam extenzí a
 ## Ukládání rout do cache
 
 Pro ukládání rout do cache je třeba mít nainstalovanou některou z cache extenzí, více v sekci [**Seznam extenzí a repozitářů**](../../../extensions.md#rozšíření---cache).
-Před uložením jakékoliv routy do cache je třeba vše v inicializovat pomocí metody `$route->InitAll()`.
+
+Před uložením jakékoliv routy do cache je třeba vše v objektu routy inicializovat pomocí metody `$route->InitAll();`.
 Routy tak lze pohodlně a kompletně inicializovat a uložit do cache a při dalším požadavku
 je při inicializaci routeru dostat z cache a použít v rámci routeru:
 ```php
@@ -670,9 +671,11 @@ class Router extenre \MvcCore\Router {
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Průchod zpracování v aplikaci**](./app-dispatch.md)  
-[další: **Vlastní handlery klíčových událostí**](./custom-handlers.md)  
+[◀ předchozí: **Průchod zpracování v aplikaci**](./app-dispatch.md)  
+[▶ další: **Vlastní handlery klíčových událostí**](./custom-handlers.md)  
 
 </div>

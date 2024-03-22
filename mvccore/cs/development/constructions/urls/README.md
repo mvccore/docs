@@ -126,14 +126,14 @@ použít jméno routy definované v routě, na kterou chci odkázat.
   jednou v `Bootstrap.php` ale volání `Url()` na routu používám po aplikaci vícekrát,
 - snažší refactoring při změně názvu controlleru, akce nebo přesunu 
   souboru controlleru, není třeba měnit všechny volání funkce `Url()`, 
-  ale pouze routu, kde jjsou controller nebo akce se změnou definovány,
+  ale pouze routu, kde jsou controller nebo akce se změnou definovány,
 - v budoucích plánech vývoje je i možnost nechat si podle nastavení rout překontrolovat,
   zda všechna volání funkce `Url()` má existující routu nebo zda obshuje všechny povinné parametry,
 
 **Nevýhody volání s názvem routy**:
 - pro každou URL si musíme vytvořit routu, což je snesitelné,
 - aplikace bude o něco málo pomalejší, při routování bude probíhat 
-  zachycováním správné rewrite routy podle regulárních výrazů,
+  zachycování správné rewrite routy podle regulárních výrazů,
   což se dá velmi dobře optimalizovat skupinami rout, více informací 
   o seskupování rout v sekci [**Routování dotazů - Seskupování rout a optimalizace**](../../dispatching/application/request-routing.md#seskupování-rout-a-optimalizace),
 - aplikace není přenosná bez URL rewrite modulu webserveru
@@ -193,7 +193,7 @@ class Index extends Base {
 			->AddCssClasses('theme')
 			// set signed in url to albums list by default:
 			->SetValues([
-				// vygeneruje url: `https://example.com/albums`
+				// generates url: `https://example.com/albums`
 				'successUrl' => $this->Url('albums_list', ['absolute' => TRUE]),
 			]);
 	}
@@ -208,7 +208,7 @@ class Index extends Base {
 Tento zápis pro generování URL využíváme pro URL adresy, které nebudou nikdy vidět v adresním řádku uživatele.
 Není to podmínkou a můžeme s klidným srdcem používat pouze tyto tvary adres, pokud nám nevadí, že uživatel 
 bude mít v každé URL adrese dlouhý query string s controllerem, akcí a parametry. Tyto adresy výhradně používáme
-pro jedno-souborové aplikace, kde je nutné odkázat na zabalenou aplikaci v témž souboru.
+pro jedno-souborové aplikace, kde je nutné odkázat na zabalenou aplikaci v témž souboru a většinou není od webserveru k dispozici přepisování adres.
 
 **Výhody volání s controllerem a akcí**:
 - pro volání funkce `Url()` nemusím tvořit routu, 
@@ -429,7 +429,7 @@ Při routování nedochází automaticky k přetypování parametrů z hodnot v 
 na typy argumentů cílové metody akce v PHP. Navíc tento přístup je neflexibilní
 a v praxi je třeba stejnou akci volat s různou sadou argumentů a mít svobodu.
 
-Proto parametry z volané URL s v controlleru vývojář získává vzdy metodou `$controller->GetParam(...);`.
+Proto parametry z volané URL si v controlleru vývojář získává vzdy metodou `$controller->GetParam(...);`.
 
 V poli parametrů URL mohou být klíče s jakýmkoliv názvem (kromě systémových názvů níže).
 Obvykle se využívá syntaxe s oddělovačem slov podtržítko `_`, pomlčka `-` nebo tečka `.`.
@@ -442,7 +442,7 @@ Protože mezi parametry mohou být i query string parametry, které může BFU p
 &nbsp;&nbsp; 
 
 ### Druhý argument - systémové názvy
-Některé názvy parametrů (klíče v poli `$params`) jsou využívány systémem, proto 
+Některé názvy parametrů (klíče v poli `$params`) jsou využívány v MvcCore interně, proto 
 prosím nepoužívejte ve svých názvech parametrů systémové názvy, které najdete 
 v interface [**`\MvcCore\Router\IConstants`**](https://github.com/mvccore/mvccore/blob/master/src/MvcCore/Router/IConstants.php). 
 Jinak byste je museli přepisovat jako konstanty na extendovaném routeru.
@@ -522,7 +522,7 @@ $this->Url('product_edit', ['id' => 3]);
 $this->Url('product_edit', ['id' => 3, 'tab' => 'reviews']);
 ```
 
-Příklad ukazuje situaci, že pokud je některý vyžadovaný parametr pro routu vynechám 
+Příklad ukazuje situaci, že pokud je některý vyžadovaný parametr pro routu vynechán 
 a parametr je v aktuálně dotazované stránce, umí si metoda `Url()` doplnit chybějící 
 parametry a jejich hodnoty z aktuálně dotazovaných parametrů.
 ```php
@@ -541,7 +541,7 @@ $this->Url('invoicing_sim_edit', ['id_sim' => 30]);
 ```
 
 Příklad ukazuje možnosti generování pokročilých rout v extenzích datagridů.
-Takové generování rout není v jádře samotném, ale v extenzích `mvccore/extcontroller-datagrid*`.
+Takové generování rout není v jádře samotném, ale v extenzích `mvccore/ext-controller-datagrid*`.
 ```php
 // `/eshop/products/1/100/filter-id-in-1;2;3/sort-id-a`
 $this->Url('product_list', [
@@ -573,9 +573,11 @@ $this->Url('documents', ['path' => 'contacts/stores']);
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Konstrukce aplikace**](../README.md)  
-[další: **Controllery a sub-controllery**](../controller/README.md)  
+[◀ předchozí: **Konstrukce aplikace**](../README.md)  
+[▶ další: **Controllery a sub-controllery**](../controller/README.md)  
 
 </div>

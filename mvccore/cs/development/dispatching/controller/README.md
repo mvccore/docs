@@ -13,9 +13,11 @@ je obsáhlejší kapitola a více k renderování je k nalezení v sekci [**Rend
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Vlastní handlery klíčových událostí**](../application/custom-handlers.md)  
-[další: **Životní cyklus controlleru**](./lifecycle.md)  
+[◀ předchozí: **Vlastní handlery klíčových událostí**](../application/custom-handlers.md)  
+[▶ další: **Životní cyklus controlleru**](./lifecycle.md)  
 
 </div>

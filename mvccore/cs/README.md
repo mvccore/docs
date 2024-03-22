@@ -9,8 +9,10 @@
 
 ---
 
+[▲ o úroveň výš](../../README.md)
+
 <div class="prev-next">
 
-[další: Vývoj aplikací](./development/README.md)
+[▶ další: **Vývoj aplikací**](./development/README.md)
 
 </div>

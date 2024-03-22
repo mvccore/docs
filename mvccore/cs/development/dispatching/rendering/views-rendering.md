@@ -10,7 +10,7 @@
 - [**Vykreslení obsahu šablony akce uvnitř šablony layoutu**](#vykreslení-obsahu-šablony-akce-uvnitř-šablony-layoutu)
 
 ## Úvod
-Renderování šablon v MvcCore funcguje na jednoduchém nativním principu PHP renderování:
+Renderování šablon v MvcCore funguje na jednoduchém nativním principu PHP renderování:
 ```php
 // obsah šablony: ./cesta/index.phtml
 <h1><?php echo 'Hello world!'; ?></h1>
@@ -45,10 +45,13 @@ se renderování urychluje, protože není třeba prohledávat pro každou
 &nbsp;&nbsp; 
 
 ### Umístění šablony akce
-Uvažujme nálsedující controller a akci:
-- PHP název třídy a metody akce: `\App\Controllers\EshopOrder\Chart::ChartAction()`,
-- příp. stejný zápis v routě: `EshopOrder\Chart::Chart`,
-- příp. stejný zápis v query stringu: `?controller=eshop-order&action=chart`.
+Uvažujme následující controller a akci:
+- PHP název třídy a metody akce:  
+  `\App\Controllers\EshopOrder\Chart::ItemsAction()`,
+- příp. stejný zápis v routě:  
+  `EshopOrder\Chart::Items`,
+- příp. stejný zápis v query stringu:  
+  `?controller=eshop-order/chart&action=items`.
 
 Šablona musí ležet v umístění `./App/Views/Scripts/eshop-order/chart/items.phtml`.
 
@@ -163,7 +166,7 @@ class Admin extends \MvcCore\Controller {
 	protected $layout = 'admins/standard'; // použije se layout šablona ./Views/Layouts/admins/standard.phtml
 }
 
-// ./App/Controllers/Admin.php
+// ./App/Controllers/Admins/Invoice.php
 namespace App\Controllers\Admins;
 
 class Invoice extends App\Controllers\Admin {
@@ -194,9 +197,11 @@ Volání používáme pro oba módy renderování:
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Módy renderování**](./rendering-modes.md)  
-[další: **Proměnné šablon**](./view-variables.md)  
+[◀ předchozí: **Módy renderování**](./rendering-modes.md)  
+[▶ další: **Proměnné šablon**](./view-variables.md)  
 
 </div>

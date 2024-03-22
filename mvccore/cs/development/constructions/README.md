@@ -1,6 +1,6 @@
 # Konstrukce aplikace
 
-Tato sekce se věnuje bežným konstrukcím v MVcCore aplikacích, kde jsou využívány předchozí znalosti.
+Tato sekce se věnuje bežným konstrukcím v MvcCore aplikacích, kde jsou využívány předchozí znalosti.
 Pokud s touto sekcí začínáte, ujistěte se, že znáte vše potřebné z předchozích kapitol, 
 případně se vraťtě odkazem v textu.
 
@@ -11,3 +11,14 @@ případně se vraťtě odkazem v textu.
 - [**Konfigurace a prostředí**](./config-evn/README.md)
 - [**Debugging a logování**](./debug-log/README.md)
 - [**Sezení a jmenné prostory**](./session/README.md)
+
+---
+
+[▲ o úroveň výš](../README.md)
+
+<div class="prev-next">
+
+[◀ předchozí: **Ukončení sezení**](../dispatching/rendering/session-saving.md)  
+[▶ další: **Vytváření URL adres**](./urls/README.md)
+
+</div>

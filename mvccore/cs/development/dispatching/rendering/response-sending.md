@@ -34,7 +34,7 @@ HTTP hlavičky se snaží být maximálně synchronizované s interním stavem H
 definovaných pomocí funkcí `header()` a `header_remove()`. Pokud tedy při vykonávání odpovědi
 nastavíte nějakou HTTP hlavičku těmito dvěma funkcemi, při okamžiku odesílání se
 HTTP hlavičky z interního stavu PHP aktualizují do objektu `\MvcCore\Response` 
-a jsou odeslány všechny včetně těch, které již v objektu byli.
+a jsou odeslány všechny včetně těch, které již v objektu byly.
 
 Přitom přednost mají hlavičky interně definované v PHP pomocí funkcí `header()`,
 pokud by již nějaká hodnota stejné hlavičky byla definována v objektu `\MvcCore\Response`.
@@ -43,6 +43,7 @@ HTTP hlavičky můžeme v objektu `\MvcCore\Response` mazat, přidávat, přepis
 detekovat přítomnost, detekovat odeslání apod. Hlavičky `Content-Encoding` se automaticky 
 detekují a přidávají za hodnotu hlavičky `Content-Type` i `; charset=...`, což nemusíme řešit.
 Objekt odpovědi rovněž umí řešit hlavičky, které mohou být uvedeny i vícekrát apod.
+Pokud managujeme HTTP hlavičky objektem `\MvcCore\Response`, objekt automaticky volá interní PHP funkce pro nastavení hlaviček a udržuje jejich stav neustále aktuální. 
 
 Na konci každé odpovědi HTTP hlaviček je i vlastní MvcCore hlavička `X-MvcCore-Cpu-Ram`,
 která odesílá pro aktuální okamžik čas zpracování odpovědi v milisekundách a maximální
@@ -72,7 +73,7 @@ $res->SendHeaders();
 # Odeslání těla odpovědi
 Odeslání těla odpovědi probíhá buď jako:
 - 1. odeslání vyrenderovaného obsahu připraveného v objektu `\MvcCore\Response` 
-     při módu rendrování s output bufferem,
+     při módu renderování s output bufferem,
 - 2. odeslání přímo šablonou nebo vývojářem při módu renderování přímo na výstup,
      bez čehokoliv připraveného v `$response->GetBody()`.
 Více o konkrétním průběhu obou módů renderování je v sekci [**Módy renderování**](rendering-modes.md).
@@ -83,7 +84,7 @@ Tělo odpovědi může být i soubor, který obvykle odesíláme nejlépe pomoc�
 [↑ Obsah](#obsah)  
 &nbsp;&nbsp; 
 
-### 1. Odeslání vyrenderovaného obsahu při módu rendrování s output bufferem
+### 1. Odeslání vyrenderovaného obsahu při módu renderování s output bufferem
 Příklad je pouze ilustrativní, můžete ho využít pro vlastní konstrukce:
 ```php
 $app = \MvcCore\Application::GetInstance();
@@ -138,9 +139,11 @@ echo 'OK';
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Přesměrování a ukončování**](./redirecting-and-termination.md)  
-[další: **Ukončení sezení**](./session-saving.md)  
+[◀ předchozí: **Přesměrování a ukončování**](./redirecting-and-termination.md)  
+[▶ další: **Ukončení sezení**](./session-saving.md)  
 
 </div>

@@ -28,7 +28,7 @@ Jenže tento design pattern přináší příliš mnoho obtěžujícíh věcí n
 továrny, konfigurace, bolesti hlavy:-) Pokud je DI skutečně zapotřebí, je možné ho 
 v hlavních controllerech implementovat popsaným způsobem, více v sekci 
 [**Instancování a konstruktor controlleru - Možnosti rozšíření chování**](../../dispatching/controller/instancing-and-constructor.md#možnosti-rozšíření-chování). 
-Jediné co je třeba dodržet při isntancování subcontrolleru je kontext
+Jediné co je třeba dodržet při instancování sub-controlleru je kontext
 rodičovského controlleru, viz další odstavec.
 
 &nbsp;  
@@ -219,9 +219,11 @@ class MainNav extends \MvcCore\Controller {
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Controllery a sub-controllery**](./README.md)  
-[další: **Routování akcí do sub-controllerů**](./sub-controllers-routing.md) 
+[◀ předchozí: **Controllery a sub-controllery**](./README.md)  
+[▶ další: **Routování akcí do sub-controllerů**](./sub-controllers-routing.md) 
 
 </div>

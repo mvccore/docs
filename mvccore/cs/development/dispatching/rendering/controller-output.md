@@ -13,18 +13,12 @@
 ## Úvod
 Aplikace může odpovídat jakýmkoliv typem odpovědi. Pro nějčastější způsoby 
 nabízí připravené cesty, které usnadní vývojáři život pro tyto případy:
-- Odeslání HTML odpovědi
-  - standardní renderování a odeslání odpovědi
+- Odeslání HTML/XHTML odpovědi
 - Odeslání XML odpovědi
-  - nastavení jiného typu odpovědi, standardní renderování a odeslání odpovědi
 - Přesměrování
-  - bez renderování, předčasné ukončení, pouze odeslání HTTP hlaviček
-- Odeslání JSON nebo JSONp odpovědi
-  - serializace dat, bez renderování, ukončení a odeslání 
+- Odeslání JSON/JSONp odpovědi
 - Odeslání TEXTové odpovědi
-  - serializace dat, bez renderování, ukončení a odeslání 
 - Odeslání chybové odpovědi
-  - ukončení aktuálního požadavku, odeslání chybové odpovědi konfigurovanou cestou
 
 &nbsp;  
 [↑ Obsah](#obsah)  
@@ -32,7 +26,7 @@ nabízí připravené cesty, které usnadní vývojáři život pro tyto přípa
 
 ## Kdy nastavit typ odpovědi
 Pokud dopředu víme podle routování dotazu, jaký bude typ odpovědi, 
-můžeme ji nastavit ve svém základním controlleru v mětodě `Init()`:
+můžeme ji nastavit ve svém základním controlleru v metodě `Init()`:
 ```php
 <?php
 
@@ -47,10 +41,16 @@ class XmlApi extends \App\Controllers\Base {
 }
 ```
 
+Poté stačí vyrenderovat obvyklou cestou výstup v sysntaxy XML a více není třeba.
+
+Obdobně lze postupovat pro jakýkoliv typ jiné odpovědi, pokud potřebujeme využít  
+výhody renderování akcí nebo layoutu.
+
 Pokud typ odpovědi dopředu nevíme, můžeme ji obdobně změnit kdykoliv do doby, 
 než jsou odeslané HTTP hlavičky, ideálně nejpozději ve volání akce v controlleru.
+
 Následující metody pro předvolené odesílání obsahu si definici výstupního 
-typu řeší automaticky kromě výstupu typu XML nebo vlastního výstupu.
+typu řeší sami automaticky. Metodu stačí zavolat a typ výstupu se nastaví.
 
 &nbsp;  
 [↑ Obsah](#obsah)  
@@ -58,12 +58,14 @@ typu řeší automaticky kromě výstupu typu XML nebo vlastního výstupu.
 
 ## Odeslání HTML odpovědi
 Tato odpověď je nastavena ve výchozím stavu aplikace pro většinu požadavků
-v metodě `Init()` základního controlleru `\MvcCore\Controller`.
+v metodě `Init()` základního controlleru `\MvcCore\Controller` tak, že je  
+do objektu `\MvcCore\Response` nastavena hlavička `Content-Type` na typ `text/html`.  
 Proto tento typ výstupu nemusíme nijak explicitně řešit. Pomocí 
 obou módů renderování se automaticky obsah poskládá a odešle klientovi.
 
 Pokud chceme odeslat jen velmi krátkou HTML odpoveď,  
-můžeme tak učinit v controlleru přímo metodou `HtmlResponse()`:
+můžeme tak učinit v controlleru přímo metodou `HtmlResponse()`.
+Metoda si sama nastaví HTTP hlavičku `Content-Type` na hodnotu `text/html`:
 ```php
 $this->HtmlResponse(
 	string $output, 
@@ -71,22 +73,31 @@ $this->HtmlResponse(
 ): void;
 ```
 Příklad je pouze ilustrativní a používá se pouze pro velmi malé odpovědi, kdy je 
-renderování příliš složité na to, aby bylo nutné ho řešit kůli jednomu řádku kódu:
+renderování příliš složité na to, aby bylo nutné ho řešit kvůli jednomu řádku kódu:
 ```php
 $this->HtmlResponse(
 	'<html><body>OK</body></html>'
 );
 ```
 
+Pokud používáme jako výstup aplikace historické `XHTML`, je třeba si ho nastavit  
+při startu aplikace pomocí volání:
+```php
+$viewClass = $app->GetViewClass();
+$viewClass::SetDoctype(\MvcCore\IView::DOCTYPE_XHTML);
+```
+Poté již bude MvcCore aplikace namísto HTML odesílat HTTP hlavičky pro XHTML
+(nebo pro jiný typ výstupu podobný HTML konfigurovaný tímto způsobem).
+
 &nbsp;  
 [↑ Obsah](#obsah)  
 &nbsp;&nbsp; 
 
 ## Odeslání XML odpovědi
-Pokud potřebujeme odeslat klientovi obsah typu XML, je třeba pouze 
-nastavit hlavičku `Content-Type` v objektu `\MvcCore\Response`
-a poté pokračovat v renderování šablon s XML obsahem obvyklám způsobem
-pomocí obou módů renderování:
+Pokud potřebujeme odeslat klientovi obsah typu XML, můžeme použít  
+oba renderovací módy a je třeba navíc pouze nastavit hlavičku `Content-Type`  
+do objektu `\MvcCore\Response` s hodnotou např. `application/xml` a poté pokračovat  
+v renderování šablon s XML syntaxí obvyklým způsobem:
 ```php
 <?php // ./App/Controllers/Rss.php
 
@@ -129,8 +140,8 @@ class Rss extends \MvcCore\Controller {
 <?php endforeach; ?>
 ```
 
-Pokud chceme odeslat jen velmi krátkou XML odpoveď, kdy je proces 
-renderování příliš složitý kvůli tak krátké odpovědi, 
+Pokud chceme odeslat jen velmi krátkou XML odpověď, kdy je proces 
+renderování příliš složitý (např. kvůli jednomu řádku kódu), 
 můžeme tak učinit v controlleru přímo metodou `XmlResponse()`.
 Metoda si sama nastaví HTTP hlavičku `Content-Type` na hodnotu `application/xml`:
 ```php
@@ -141,6 +152,8 @@ $this->XmlResponse(
 ```
 Příklad je pouze ilustrativní:
 ```php
+$this->response->SetHeader('Content-Type', 'application/rss+xml');
+...
 $this->XmlResponse(
 	'<?xml version="1.0" encoding="UTF-8"?><error>Not found.</error>'
 );
@@ -155,7 +168,14 @@ Dalším běžným způsobem odpovědi aplikace je odeslání dat ve formátu JS
 dat serializovaných jako JSON a obalených voláním funkce zaslané v query string 
 parametru `callback`, čemuž říkáme JSONp odpověď.
 
-Nejčastěji máme nějaká data jako PHP `object|array` a potřebujeme je serializovat
+Pokud je v objektu `\MvcCore\Request` automaticky detekován AJAX dotaz a v kontextu  
+controlleru je tak property `$controller->ajax` nastavena na `TRUE`, je ve výchozím  
+stavu aplikace tento typ požadavků již nastaven v objektu `\MvcCore\Response`  
+HTTP hlavičkou `Content-Type` na typ `application/json`. To se opět děje v metodě  
+`Init()` základního controlleru `\MvcCore\Controller`. Proto tento typ výstupu  
+nemusíme nijak explicitně řešit. Stačí odpovědět JSON syntaxy.
+
+Nejčastěji však máme nějaká data jako PHP `object|array` a potřebujeme je serializovat
 do JSONu, odeslat a ukončit odpověď. Takovou odpoveď zajistíme v controlleru metodami:
 - `JsonResponse()` pro JSON odpověď:
   - odešle čistý JSON,
@@ -179,11 +199,11 @@ $this->JsonpResponse(
 ): void;
 ```
 
-Obě metody serializují předaná data do JSONu a nastaví odpověď do objektu
-`\MvcCore\Response` pro pozdějí odeslání v okamžiku uložení. Obě metody mají 
-automaticky nastavené, že mají ihned poté vést instanci aplikace do metody
-`$app->Terminate()` a vyhodit vyjímku `\MvcCore\Controller\TerminateException`.
-Tato vyjímka také vede k ukončení vykonávání požadavku, ale pokud je již 
+Obě metody serializují předaná data do JSONu a nastaví odpověď do objektu  
+`\MvcCore\Response` pro pozdějí odeslání v okamžiku ukončení požadavku. Obě metody mají  
+automaticky nastavené, že mají ihned poté vést instanci aplikace do metody  
+`$app->Terminate()` a vyhodit vyjímku `\MvcCore\Controller\TerminateException`.  
+Tato vyjímka také vede k ukončení vykonávání požadavku, ale pokud je již  
 aplikace ukončená, činnosti se neopakují.
 
 Příklad použití v controlleru (příklad postrádá potřebná ověření, je pouze ilustrativní):
@@ -207,15 +227,15 @@ class Product extends \App\Controllers\Eshop {
 Tento postup má ale za následek, že příliš velké kolekce dat se musí nejprve
 dostat z databáze do PHP modelu, v modelu rozparsovat a inicializovat do PHP 
 objektů a tyto objekty se poté musí zpět serializovat do JSONu pro odeslání 
-k uživateli. V jeden moment tak máme v paměti 2x věliká a téměř stejná 
+k uživateli. V jeden moment tak máme v paměti 2x ta samá, veliká a téměř stejná 
 data - PHP objekty i serializovaná data v JSON stringu. Pokud je dat opravdu hodně,
 může dojít k dosažení paměťového limitu a PHP proces se ukončí. Proto je pro velká 
 data třeba postupovat způsobem níže. Příklad používá extenzi 
 [**`mvccore/ext-model-db-mysql`**](https://github.com/mvccore/ext-model-db-mysql)
-a postrádá potřebná ověření, je pouze ilustrativní:
-- data se v modelu nenačtou ihned, ale vytvoří se streamovací iterator z databáze,
-- v controlleru se seralizuje velká datová kolekce postupně po jedné instanci,
-- odpověď se odesílá přímo uživateli do váýstupu, neskladuje se v `\MvcCore\Response`.
+a postrádá potřebná ověření - je tedy pouze ilustrativní:
+- data se v modelu nenačtou ihned, ale vytvoří se streamovací iterátor z databáze,
+- neserializuje se velká datová kolekce najednou, ale postupně po jedné instanci,
+- odpověď se odesílá přímo uživateli do výstupu, neskladuje se v `\MvcCore\Response`.
 
 ```php 
 <?php // ./App/Models/Eshops/Products/Review.php
@@ -286,17 +306,18 @@ class Product extends \App\Controllers\Eshop {
 	}
 }
 ```
-Podobně můžeme postupovat pro jakkoliv dlouhé odpovědi jiných typů.
+Podobně můžeme postupovat i pro jakkoliv dlouhé odpovědi jiných typů.
 
 &nbsp;  
 [↑ Obsah](#obsah)  
 &nbsp;&nbsp; 
 
 ## Odeslání textové odpovědi
-Méně častým typem odpovědi je typ čistého textu. Jeho použití je stejné jako
-s odpovědí typu JSON nebo JSONp. Odpověď je nejprve nastavena do objektu 
-`\MvcCore\Response` a při ukončení požadavku odeslána klientovi.
-Text odesíláme metodou `TextResponse()` a tato metoda si nastaví sama HTTP 
+Méně častým typem odpovědi je typ čistého textu. Jeho použití je podobné jako  
+u předchozích typů. Můžeme použít nastavení hlavičky odpovědi a standardní renderování  
+s textovou syntaxí nebo odeslat krátký text přímo voláním metody pro textovou odpověď.  
+Odpověď je nejprve nastavena do objektu `\MvcCore\Response` a při ukončení požadavku odeslána klientovi.  
+Text odesíláme metodou `TextResponse()` a tato metoda si nastaví sama HTTP  
 hlavičku `Content-Type` na hodnotu `text/plain`:
 ```php
 $this->TextResponse(
@@ -351,7 +372,9 @@ Z aplikace můžeme odpovědět libovolným způsobem.
 Máme dvě možnosti podle velikosti odpovědi:
 - kratší postup pro menší odpovědi:
   - nastavíme HTTP hlavičku typu odpovědi,
-  - zapíšeme odpoveď do objektu `\MvcCore\Response`,
+  - vyrenderujeme odpověď v nastavené syntaxy nebo
+    odpověď zapíšeme do objektu `\MvcCore\Response`
+    nějakou předvolenou metodou,
   - zavoláme `$controller->Terminate()`,
 - delší postup pro větší odpovědi:
   - nastavíme HTTP hlavičku typu odpovědi,
@@ -450,23 +473,23 @@ Pro chybové odpovědi máme v Mvccore aplikaci několik možností:
   - dojde k zalogování chyby,
   - odeslaná odpověď se odešle buď jako:
     - HTML odpověď pomocí error controlleru a error akce k tomu určené,
-    - nebo pokud něco opět nevyjde, jen jako plaint text odpověď s textem chyby a HTTP kódem,
+    - nebo - pokud něco opět nevyjde - odešle se odpověď pouze jako `text/plain` s textem chyby a HTTP kódem,
 
 - **můžeme kdykoliv vyhodit svoji vyjímku**:
   - vyjímka by pro výchozí chování měla mít text, který nic bezpečnostního neprozrazuje,
-    zobrazení textu na výstup můžeme případně ovlivnit ve své implementaci error akce,
+    případně zobrazení textu vyjímky na výstup můžeme ovlivnit ve své implementaci error akce,
   - vyjímce můžeme přiřadit vlastní HTTP stavový kód, často jako 400, 404, 500 nebo jinný,
-  - dojde k zalogování vyjímky,
+  - vždy dojde k zalogování vyjímky (neloguje se pouze `\MvcCore\Controller\TerminateException`),
   - odeslaná odpověď se opět odešle buď jako:
     - HTML odpověď pomocí error controlleru a error akce k tomu určené,
-    - nebo pokud něco opět nevyjde, jen jako plaint text odpověď s textem chyby a HTTP kódem,
+    - nebo - pokud něco opět nevyjde - pouze jako `text/plain` odpověď s textem chyby a HTTP kódem,
   - tento způsob umožnuje navíc:
     - logovat svoje PHP typy vyjímek,
 	- odesílat svoje chybové HTTP status kódy,
 
 - **můžeme vytvořit/upravit chybové stránky**:
   - díky tomu můžeme uživateli odesílat pouze obecné chybové zprávy a HTTP status kód 
-    a do textu vyjímek můžeme dát prakticky cokoliv, nic se nedostane uživateli,
+    a do textu vyjímek můžeme dát cokoliv svého, nic citlivého se tak nedostane ke klientovi,
   - více k výchozímu controlleru a jeho chybovým akcím je v sekcích: 
     - [**Průchod zpracování v aplikaci - Vyřízení případné vyjímky**](../application/app-dispatch.md#vyřízení-případné-vyjímky),
 	- [**Routování dotazů - Výchozí controller a akce**](../application/request-routing.md#výchozí-controller-a-akce).
@@ -477,9 +500,11 @@ Pro chybové odpovědi máme v Mvccore aplikaci několik možností:
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Escapování**](./escaping.md)  
-[další: **Přesměrování a ukončování**](./redirecting-and-termination.md)  
+[◀ předchozí: **Escapování**](./escaping.md)  
+[▶ další: **Přesměrování a ukončování**](./redirecting-and-termination.md)  
 
 </div>

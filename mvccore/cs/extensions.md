@@ -767,3 +767,13 @@ composer require mvccore/packager
 [↑ Obsah](#Obsah)  
 &nbsp;&nbsp;  
 
+---
+
+[▲ o úroveň výš](../../README.md)
+
+<div class="prev-next">
+
+[◀ předchozí: **Vývoj aplikací**](./development/README.md)  
+[▶ další: **Roadmapa budoucího vývoje**](./roadmap.md)  
+
+</div>

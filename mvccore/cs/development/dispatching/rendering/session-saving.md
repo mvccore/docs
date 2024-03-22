@@ -12,11 +12,11 @@ uživatele podle session id cookie (obvykle `PHPSESSID`) a podle tohoto id doch�
 k automatické inicializaci dat do super globální proměnné `$_SESSION`, kde můžeme 
 používat data s hodnotami pouze pro konkrétního uživatele.
 
-Sezení se může a nemusí nastartovat. Některé dotazy na apliakci nepotřebují
+Sezení se může a nemusí nastartovat. Některé dotazy na aplikaci nepotřebují
 znát nic o uživateli, který se ptá. V MvcCore aplikacích se sezení startuje 
 vždy až když je třeba.
 
-Pokud se sezení nastartuje a vývojář v něm něco změní, je třeba pro další 
+Pokud se sezení nastartuje a vývojář v něm něco zmnění, je třeba pro další 
 dotazy na aplikaci data ze sezení uložit, aby byly k dispozici pro další 
 požadavek v pořadí, který by případně sezení také mohl potřebovat.
 
@@ -115,9 +115,11 @@ if (
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Odeslání hlaviček a obsahu**](./response-sending.md)  
-[další: **Pokročilejší konstrukce**](../../constructions/README.md)  
+[◀ předchozí: **Odeslání hlaviček a obsahu**](./response-sending.md)  
+[▶ další: **Pokročilejší konstrukce**](../../constructions/README.md)  
 
 </div>

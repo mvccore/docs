@@ -73,9 +73,11 @@ Tento princip renderování je běžný ve většině MVC frameworků.
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Renderování a odesílání**](../README.md)  
-[další: **Módy renderování**](./rendering-modes.md)  
+[◀ předchozí: **Renderování a odesílání**](../README.md)  
+[▶ další: **Módy renderování**](./rendering-modes.md)  
 
 </div>

@@ -58,13 +58,13 @@ novou lokální proměnnou nebo změním existující lokální proměnnou, změ
 (nereferenční) datový typ proměnné - tedy `bool`, `int`, `float`, `string`, `null` a `array`.
 
 Pokud použiji zápis `$this->variable` a vytvořím nebo změním proměnnou, bude nová hodnota proměnné 
-známa i v jiných šablonách. Proto je zápis přes kontext `$this` vždy flexibilnější, ale protože využívá
-PHP magickou funkci `__get()`, je i o něco pomalejší, pokud ho budete používat v nějakém cyklu opakovaně.
+známa i v jiných šablonách. Proto je používání přes kontext `$this` vždy flexibilnější, ale protože využívá
+PHP magické funkce `__get()` a `__set()`, je i o něco pomalejší, pokud budete proměnnou používat v nějakém cyklu opakovaně.
 
 Získávání proměnných přes `$this` kontext pomocí PHP magické funkce `__get()` přináší ještě jeden benefit.
 Lze přistupovat k `public`, `protected` i `private` vlastnostem controlleru přímo z view,
 aniž byste je museli do view z controlleru explicitně definovat. Je to užitečné pro případ, že jste na 
-něco zapoměli nebo pokud pracujete s nějakou komponentou třetí strany a její vývojář nenastavil 
+něco zapomněli nebo pokud pracujete s nějakou komponentou třetí strany a její vývojář nenastavil 
 do view vše, co jste potřebovali. Opět je to zde ale zaplaceno tím, že magické funkce budou o něco pomalejší.
 
 Pokud to tak děláte běžně, ztratíte tak více přehled o tom, co vše šablona z controlleru potřebuje definovat.
@@ -145,7 +145,7 @@ v šablonách znát kontext všech proměnných, které by mohl vývojář chtí
 - [**Mód renderování přes output buffering**](./rendering-modes.md#1-renderování-přes-output-buffering-do-mvccoreresponse)
   - Šablona akce se renderuje první, poté teprve šablona layoutu.
   - Při započetí renderování layout šablony si layout přebírá proměnné ve stavu po dokončení renderování šablony akce.
-  - Pokud vyrobím v controlleru nebo v šabloně akce proměnnou, bude poté známa v celém kontextu šablony layoutu se stejnou hodnotou.
+  - Pokud vyrobím v controlleru nebo v šabloně akce proměnnou, bude poté známa v celém kontextu šablony layoutu se stejnou hodnotou (musím přistupovat přes `$this` kontext).
 - [**Módu přímého renderování na výstup**](./rendering-modes.md#2-přímé-renderování-na-výstup)
   - Šablona layoutu se započne renderovat první, uvnitř ní se renderuje šablona akce a poté se dokončí zbytek šablony layout.
   - Při započetí renderování šablony akce přebírá šablona akce proměnné od aktuálního stavu z šablony layoutu.
@@ -165,7 +165,7 @@ aby se šablony chovaly jako jeden velký view kontext se všemi proměnnými. K
 sub-controller v některé šabloně akce (převodem na string přes `__toString()` - `<?=$subController?>` 
 nebo vlastním voláním metody `Render()` - `<?=$subController->Render()?>`), převezme si 
 nově vytvářená šablona pro renderování obsahu sub-controlleru také sklad proměnných z právě 
-renderované šablony. Nedojde ale k přepsání k případně stejně nazvaných proměnných 
+renderované šablony. Nedojde ale k přepsání v případně stejně nazvaných proměnných 
 v šabloně sub-controlleru.
 
 Existuje vyjímka u přebírání view kontextu proměnných sub-controllerů, formulářů a datagridů. 
@@ -177,8 +177,8 @@ Pokud se tedy stane, že hlavní controller definuje stejný název proměnné d
 některý sub-controller do svého view, je pak v kontextu view šablony sub-controlleru 
 přítomna hodnota ze sub-controlleru a v šabloně akce nebo layoutu přítomna hodnota definovaná
 z hlavního controlleru. Zde není žádoucí plné přenesení proměnných.
-Všechny ostatní proměnné z definované z hlavního controlleru, které neexistují ve view
-sub-controlleru jsou v sub-controller view automaticky známé.
+Všechny ostatní proměnné definované z hlavního controlleru, které neexistují ve view
+sub-controlleru, jsou v sub-controller view automaticky známé.
 
 Pokud je navíc třeba z nějaké šablony sub-controlleru nutné sáhnout do kontextu hlavní šablony, 
 je vždy v každé sub-controller šabloně k dispozici možnost získat view kontext 
@@ -192,9 +192,11 @@ Pokud je hierarchie vykreslování controlerů a view vyšší, je možné volá
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Renderování šablon**](./views-rendering.md)  
-[další: **Základní view helpery**](./view-helpers.md)  
+[◀ předchozí: **Renderování šablon**](./views-rendering.md)  
+[▶ další: **Základní view helpery**](./view-helpers.md)  
 
 </div>

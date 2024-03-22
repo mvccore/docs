@@ -48,6 +48,9 @@ Pokud použiji v prvním parametru jako první znak(y) tečku `./` nebo dvě te�
 pak mohu definovat relativní cestu od šablony, kde je volání zapsáno.
 Relativní cesta by nikdy neměla začínat přímo lomítkem. I na Windows používáme dopředná lomítka.
 
+Těmito helpery lze také explicitně předávat do cílové šablony proměnné  
+pomocí druhého argumentu, které budou existovat v kontextu cílové šablony.
+
 &nbsp;  
 [↑ Obsah](#obsah)  
 &nbsp;&nbsp; 
@@ -100,7 +103,7 @@ je zapsána cesta, kde měl soubor být. Proto je práce s těmito helpery velmi
 ## Url helpery
 Funkce sloužící pro vytváření URLs podle rewrite rout nebo pomocí query stringu.
 ```php
-// objektové volání do \MvcCore\View\UrlHelpers:
+// objektové volání (\MvcCore\View\UrlHelpers):
 $this->Url(string $controllerActionOrRouteName = 'Index:Index', array $params = []): string;
 $this->AssetUrl(string $path): string;
 // zkrácené lokální closure funkce:
@@ -110,7 +113,7 @@ $assetUrl(string $path): string;
 Helper `Url()` slouží pro standardní vytváření URL adres a jde o zkratku do funkce `Url()` v routeru.
 
 Helper `AssetUrl()` slouží pro vytváření URL adres na JS/CSS soubory nebo obrázky, které budou 
-zabaleny do jedno-souborové aplikace.
+zabaleny do jedno-souborové aplikace. Ve standardním typu webové aplikace tento helper nepoužívejte.
 
 Více o vytváření URL adres v sekci [**Vytváření adres aplikace**](../../constructions/urls.md).
 
@@ -178,7 +181,7 @@ Některé pomocné funkce jsou obsáhlejší a proto nejsou součástí jádra.
 
 Extenze view helperů jsou ale nadmíru užitečné a maximálně doporučované.
 Obsahují pomocné funkce pro práci s JS/TS a CSS soubory pro bundling, minimalizace apod.,
-obsahují formátování nejčastějších typů nebo obsahují funkce práci s textem.
+obsahují formátování nejčastějších typů nebo obsahují funkce pro práci s textem.
 
 Podrobnější seznam view helper extenzí a odkazy na své dokumentace nelzente v sekci [**Rozšíření a repozitáře MvcCore**](../../../extensions.md#rozšíření---pomocné-funkce-šablon)
 ```php
@@ -330,7 +333,7 @@ Uvažujme pomocnou funkci, kterou budeme ve view šablonách používat jako `$t
 - musí obsahovat veřejnou instanční metodu podle názvu helperu - `public function Format ();`.
 
 Funkce helperu nemusí vracet string, může vracet instanci třídy na které můžeme volat další 
-metody. Záleží na tom, jak budeme chtít helper ve view šablonách chtít používat.
+metody. Záleží na tom, jak budeme chtít helper ve view šablonách používat.
 
 Vlastní helpery jsou instancovány automaticky pro každý požadavek aplikace 
 a to až když jsou potřeba a jejich vytvořená instance se používá 
@@ -378,7 +381,7 @@ class FormatHelper {
 
 ### Standardní helper
 Proto, abychom mohli helper případně nějak nastavit již v úvodu požadavku aplikace,
-např. podle lokalizace uživatele apod. Používáme proto třídu předka pro view helpery.
+např. výchozí formát datummů apod. Používáme proto třídu předka pro view helpery.
 
 Tato třída se musí doinstalovat extenzí `mvccore/ext-view-helper`:
 ```sh
@@ -386,7 +389,7 @@ composer require mvccore/ext-view-helper
 ```
 
 Implementace helperu musí mít:
-- třídu předka jako `\MvcCore\Ext\Views\Helpers\AbstractHelper`,
+- třídu předka `\MvcCore\Ext\Views\Helpers\AbstractHelper`,
 - musí mít statickou vlastnost `protected static $instance = NULL;`.
 
 &nbsp;  
@@ -436,7 +439,7 @@ dozazené automaticky před svým prvním použitím v šabloně (před prvním 
 // aktuálně vykreslovaný view objekt (v průběhu používání se automaticky mění):
 $this->view;
 
-// controller náležící k aktuálně vykreslovanému view objektu  (v průběhu používání se automaticky mění):
+// controller náležící k aktuálně vykreslovanému view objektu (v průběhu používání se automaticky mění):
 $this->controller;
 
 // aplikační popisný objekt požadavku:
@@ -449,7 +452,7 @@ $this->response;
 Navíc můžeme tento view helper jakkoliv nakonfigurovat již v počáteční fázi aplikace.  
 Např. nastavit hodnoty `Yes` a `No` na jiné texty, pokud je lokalizace uživatele německá:
 ```php
-<?php
+<?php // kód je pouze ilustrativní:
 
 namespace App\Controllers;
 
@@ -477,7 +480,7 @@ class Base extends \MvcCore\Controller {
 
 ### Helpery s funkcemi pro lokalizaci
 Často je třeba view helpery nastavit mnohem sofistikovaněji podle potřeb lokalizace aplikace.
-Pro tytp účely je třeba nainstalovat extenzi se základní třídou, která rozšiřuje možnosti view helperů ještě o něco více:
+Pro tyto účely je třeba nainstalovat extenzi se základní třídou, která rozšiřuje možnosti view helperů ještě o něco více:
 ```sh
 composer require mvccore/ext-view-helper-internationalized
 ```
@@ -493,7 +496,7 @@ Tuto třídu již používají extenze MvcCore pro formátování čísel, finan
 &nbsp;&nbsp; 
 
 #### Příklad lokalizovaného helperu
-Rozšíření může ve výsledku vypadat velmi jednoduše puze podědením jiného rozšíření, které udělá mnoho práce za Vás.
+Rozšíření může ve výsledku vypadat velmi jednoduše pouze podědením jiného rozšíření, které udělá mnoho práce za Vás.
 Nebo můžete využít veškeré možnosti lokalizačních vlastností níže a naprogramovat vlastní formátování podmíněné nastavením lokalizace.
 ```php
 <?php
@@ -610,9 +613,11 @@ $this->defaultLangAndLocale = ['en', 'US'];
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Proměnné šablon**](./view-variables.md.md)  
-[další: **Výstupy z controlleru, typy odpovědí**](./controller-output.md)  
+[◀ předchozí: **Proměnné šablon**](./view-variables.md.md)  
+[▶ další: **Výstupy z controlleru, typy odpovědí**](./controller-output.md)  
 
 </div>

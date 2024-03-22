@@ -7,7 +7,7 @@
 
 ## Úvod
 Interface controlleru nedefinuje žádný `__constructor()` třídy controller.
-Controller je instancí aplikace vytvořen vždy přes staickou metodu `CreateInstance()`:
+Controller je instancí aplikace vytvořen vždy přes statickou metodu `CreateInstance()`:
 ```php
 // plný název třídy controlleru poděděný z \MvcCore\Controller
 $controllerClass = '\App\Controllers\Index'; 
@@ -16,7 +16,7 @@ $controller = $controllerClass::CreateInstance();
 ```
 
 Popisovaný kód i kód níže na této stránce je k dispozici
-ve třídě a mětodě `\MvcCore\Application` v metodě [**`$app->CreateController()`**](https://github.com/mvccore/mvccore/blob/master/src/MvcCore/Application/Dispatching.php#L197).
+ve třídě a metodě `\MvcCore\Application` v metodě [**`$app->CreateController()`**](https://github.com/mvccore/mvccore/blob/master/src/MvcCore/Application/Dispatching.php#L197).
 
 &nbsp;  
 [↑ Obsah](#obsah)  
@@ -71,9 +71,11 @@ $controller->SetRouter(\MvcCore\Router $router);: \MvcCore\Controller;
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Životní cyklus controlleru**](./lifecycle.md)  
-[další: **Inicializace controlleru**](./initialization.md)  
+[◀ předchozí: **Životní cyklus controlleru**](./lifecycle.md)  
+[▶ další: **Inicializace controlleru**](./initialization.md)  
 
 </div>

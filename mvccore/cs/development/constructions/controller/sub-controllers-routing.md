@@ -152,7 +152,7 @@ protože nemá uvedenou žádnou fixní šablonu pomocí property
 Pokud bude mít nadřazený controller akci, kterou nemá sub-controller, je třeba mít 
 v inicializaci sub-controlleru podmínku pro výchozí akci sub-controlleru.
 
-Kód je sice z větší části řešen manuálně, ale je to kvůli tomu, že reaálný svět 
+Kód je sice z větší části řešen manuálně, ale je to kvůli tomu, že reálný svět 
 nikdy nebude mít pouze jedno řešení. Framework nechce svazovat vývojáře pouze jedním
 řešením, proto nedělá více automatické práce, než je nutné.
 
@@ -231,9 +231,11 @@ $router->AddRoutes([
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Vytvoření a renderování sub-controllerů**](./sub-controllers-dispatching.md)  
-[další: **Dočasné zprávy - flash messages**](./flash-messages.md)
+[◀ předchozí: **Vytvoření a renderování sub-controllerů**](./sub-controllers-dispatching.md)  
+[▶ další: **Dočasné zprávy - flash messages**](./flash-messages.md)
 
 </div>

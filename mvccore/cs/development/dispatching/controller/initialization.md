@@ -4,7 +4,7 @@
 - [**Úvod**](#úvod)
 - [**Kdy je inicializace volána, příklad**](#kdy-je-inicializace-volána-příklad)
 - [**Volání rodičivské metody**](#volání-rodičivské-metody)
-- [**Interní zaregistrování `$this` do kolekce všech kontrollerů**](#interní-zaregistrování-this-do-kolekce-všech-kontrollerů)
+- [**Interní zaregistrování `$this` do kolekce všech controllerů**](#interní-zaregistrování-this-do-kolekce-všech-controllerů)
 - [**Automatické nastartování session podle `$controller->autoStartSession`**](#automatické-nastartování-session-podle-controller-autostartsession)
 - [**Automatická inicializace označených vlastností**](#automatická-inicializace-označených-vlastností)
   - [**Upozornění pro auto-inicializaci**](#upozornění-pro-auto-inicializaci)
@@ -17,7 +17,7 @@
 
 ## Úvod
 Inicializace controlleru samozřejmě může probíhat i ve vlastním konstruktoru controlleru.  
-Zde je však "inicialice controlleru" nazýván proces, kdy je na nastavené instanci controlleru 
+Zde je však "inicializace controlleru" nazýván proces, kdy je na nastavené instanci controlleru 
 volána aplikací veřejná metoda:
 ```php
 $controller->Init(): void;
@@ -68,7 +68,7 @@ class Product extends \MvcCore\Controller {
 
 ## Volání rodičivské metody
 Controller má automaticky rozšířením třídy `\MvcCore\Controller` tuto metodu implementovanou od předka.  
-Pokud chceme něco k této mětodě přidat, je nutné vždy volat stejně pojmenovanou metodu rodičovské třídy.
+Pokud chceme něco k této metodě přidat, je nutné vždy volat stejně pojmenovanou metodu rodičovské třídy.
 Rodičovskou metodu bychom měli volat ideálně jako první statement v metodě `Init()`:
 ```php
 <?php
@@ -101,8 +101,8 @@ Zavoláním rodičovské metody `parent::Init();` zařídíme:
 [↑ Obsah](#obsah)  
 &nbsp;&nbsp; 
 
-## Interní zaregistrování `$this` do kolekce všech kontrollerů
-Každý controller je při svém vytvoření v mětodě `\MvcCore\Controller::CreateInstance();` zaregistrován 
+## Interní zaregistrování `$this` do kolekce všech controllerů
+Každý controller je při svém vytvoření v metodě `\MvcCore\Controller::CreateInstance();` zaregistrován 
 do skladu všech controllerů, aby bylo možné s controllery globálně pracovat frameworkem.
 Pokud je metoda `\MvcCore\Controller::CreateInstance();` implementována zcela jinak, 
 volání rodičovské funkce `parent::Init()` pro jistotu ověří, zda je aktuální kontext controlleru 
@@ -350,15 +350,15 @@ MvcCore záměrně neimplementuje Dependency Injection design pattern a maximál
 způsobem této automatické inicializace. Je to z následujících důvodů:
 - I když DI container používá cache, stojí další procesní čas,
 - DI potřebuje více kódu a konfigurace => další tooling => další know how navíc pro start práce,
-- MvcCore nepracuje asynchronně a pro práci s modely se využívá design pattern Active Record,
+- MvcCore nepracuje asynchronně a prozatím nepoužívá PHP woekery, pro práci s modely se využívá design pattern Active Record,
   blokový kód a co nejjednodušší přístup.
   
 Vývojář chce programovat nebo vydělávat pěníze? Chce vydělávat peníze tak, aby ho práce bavila
 a aby denně neluštil ošklivý kód. MvcCore je navrženo tak, aby nevznikali dlouhé třídy,
-kde nelze najít pohodlně závislost. Každá controller, model či cokoliv jiného
+kde nelze najít pohodlně závislost. Každý controller, model či cokoliv jiného
 lze i v sebesložitější aplikaci strukturovat tak, aby to bylo v rámci doporučení coding standards.
 
-Dependency injection přináší pouze syntaktickou pohodu. I testování nebo více
+Dependency injection zatím přináší syntaktickou pohodu, nebo je nutně třeba až pro aplikace používající PHP workery či asynchronní přístup. I testování nebo více
 databázových serverů je standardně možné řešit jinak než pomocí DI. 
 
 V praxi se setkávám spíše s testováním celého funkčního výsledku.
@@ -380,8 +380,8 @@ Zde nejsou myšleny děti jako potomci tříd, ale jako děti controlleru přida
 pomocí `$controller->AddChildController($subController);`.
 
 Pokud využíváme automatickou inicializaci pro sub-controllery (formuláře 
-nebo DataGridů, což jsou také jen rozšíření controlleru), je třeba i na nich zavolat 
-standardní metodu `$subcontroller->Init();`, aby i v nich proběhl životní cyklus
+nebo datagridy, což jsou také jen rozšíření controlleru), je třeba i na nich zavolat 
+standardní metodu `$subController->Init();`, aby i v nich proběhl životní cyklus
 controlleru tak jako jinde. Právě toto zavolání `Init()` metody na sub-controllerech 
 řeší volání rodičovské metody `parent::Init();`.
 
@@ -391,9 +391,11 @@ controlleru tak jako jinde. Právě toto zavolání `Init()` metody na sub-contr
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Instancování a konstruktor**](./instancing-and-constructor.md)  
-[další: **Inicializace akcí controlleru**](./action-initialization.md)  
+[◀ předchozí: **Instancování a konstruktor**](./instancing-and-constructor.md)  
+[▶ další: **Inicializace akcí controlleru**](./action-initialization.md)  
 
 </div>

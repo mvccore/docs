@@ -42,7 +42,7 @@ Vyřizování požadavku uvnitř instance aplikace lze rozdělit do těchto krok
 &nbsp;&nbsp; 
 
 ## Inicializace/ověření existence hlavních objektů
-aplikace pro vyřízení požadavku potřebuje provést 4 základní inicializace:
+Aplikace pro vyřízení požadavku potřebuje provést 4 základní inicializace:
 
 - Vytvoření objektu prostředí a jeho detekce:
   - `$app->GetEnvironment()->GetName()`
@@ -231,14 +231,14 @@ class Index extends \MvcCore\Controller {
 ## Ukončení požadavku a odeslání odpovědi
 
 Ukončení vyřizování dotazu aplikace interně nepoužívá a nelze provádět pomocí 
-metod `die();`, `exit();` nebo `exit;`¨, protože tak nedochází k případnému 
+metod `die();`, `exit();` nebo `exit;`, protože tak nedochází k případnému 
 ukládání sezení nebo k volání dalších nakonfigurováných handlerů aplikace.
 
 Ukončení aplikace je voláno automaticky a prováděno v metodě `$app->Terminate()`.
 
 Zde se postupně provádějí tyto volání:
-- registrace shutdown handler pro uložení sezení (pokud je nějaké nastartováno),
-- odeslání hlaviček a těla odpovědi (pokud ještě nebylo učiněno),
+- registrace shutdown handleru pro uložení sezení (pokud je nějaké nastartováno),
+- odeslání HTTP hlaviček a těla odpovědi (pokud ještě nebylo učiněno),
 - ukončení všech controllerů,
 - volání vlastních handlerů aplikace po ukončení vyřizování požadavku.
 
@@ -254,9 +254,11 @@ sahat aktivně na hodnoty v sezení a případně změnit co je třeba.
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Start aplikace**](./app-start.md)  
-[další: **Routování dotazů**](./request-routing.md)  
+[◀ předchozí: **Start aplikace**](./app-start.md)  
+[▶ další: **Routování dotazů**](./request-routing.md)  
 
 </div>

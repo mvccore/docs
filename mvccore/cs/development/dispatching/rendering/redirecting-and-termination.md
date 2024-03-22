@@ -12,8 +12,8 @@ Jedná se o odeslání HTTP stavového kódu 3xx a hlavičky `Location` s cílov
 
 K přesměrování uživatele by mělo docházet ideálně v inicializaci controlleru, kdy
 dopředu raději zjistíme, že dál nemá smysl odpověď vykonávat, abychom uživatele přesměrovali
-co nejdříve a nemusel zbytečně čekat. Důvody jsou obvykle nepřihlášený uživatel, 
-smazaný produkt na eshopu, apod. Přesměrovávat můžeme ale prakticky kdykoliv až do doby,
+co nejdříve a nemusel zbytečně čekat. Důvody jsou obvykle nepřihlášený uživatel v administraci, 
+přejmenovaná URL stránky apod. Přesměrovávat můžeme ale prakticky kdykoliv až do doby,
 něž jsou odeslány HTTP hlavičky, tedy ideálně do doby vykonání akce controlleru.
 
 Nejčastěji tuto úlohu řeší formuláře, ale pro formuláře ji nemusíte zajišťovat tímto 
@@ -111,9 +111,11 @@ $app->Terminate();
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Výstupy z controlleru, typy odpovědí**](./controller-output.md)  
-[další: **Odeslání hlaviček a obsahu**](./response-sending.md)  
+[◀ předchozí: **Výstupy z controlleru, typy odpovědí**](./controller-output.md)  
+[▶ další: **Odeslání hlaviček a obsahu**](./response-sending.md)  
 
 </div>

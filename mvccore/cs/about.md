@@ -75,3 +75,14 @@ Pomocí knihovny MvcCore `Packager` lze také zabalit plně cizí knihovny do je
 PHP souboru, což zrychluje interpretaci PHP díky tomu, že se využívá maximálně 
 jeden OPCODE z vyrovnávací paměti a neprobíhá ověžování a reinterpretace před 
 seskládáváním jednotlivých objektů do konečného výsledu pro zpracování.
+
+---
+
+[▲ o úroveň výš](../../README.md)
+
+<div class="prev-next">
+
+[◀ předchozí: **Roadmapa budoucího vývoje**](./roadmap.md)  
+[▶ další: **Coding Standards**](./coding-standards.md)  
+
+</div>

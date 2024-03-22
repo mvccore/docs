@@ -72,10 +72,10 @@ Pokud plánujete aplikaci zabalit do jednosouborového řešení, měl by
 první řádek mít zavináč na začátku. Důvody "proč" přesahují rámec dokumentace.
 Pro standardní webové aplikace není nutné používat zavináč na začátku řádku.
 
-Řádek č. 2 je volání jednoduché třídy `Bootstrap`, která připraví 
+Řádek č. 3 je volání jednoduché třídy `Bootstrap`, která připraví 
 a nastaví novou instanci aplikace pro každý request.
 
-Řádek č. 3 je zpracování requestu frameworkem. Zde již pokračuje 
+Řádek č. 4 je zpracování requestu frameworkem. Zde již pokračuje 
 tok aplikace třídou `\MvcCore\Application`.
 
 &nbsp;  
@@ -100,6 +100,7 @@ za autoloading Composeru. Automaticky se nejprve hledá v těchto umístěních:
 - `./App`
 - `./Libs`
 - `.`
+
 Umístění lze konfigurovat pomocí definice konstant `MVCCORE_*`.
 
 Pokud tedy PHP hledá třídu `\App\Controllers\Index`, automaticky se hledá
@@ -130,7 +131,7 @@ načtena autoloadingem MvcCore.
 
 Třída Bootstrap nemusí implementovat žádný interface a její stavba 
 je pouze na základě zvyklostí, které říkají, že její veřejná 
-statická metoda `Init()` má vrátit instanci objektu applikace
+statická metoda `Init()` má vrátit instanci objektu aplikace
 v připraveném stavu pro vyřizování požadavku:
 ```php
 <?php
@@ -169,7 +170,7 @@ případech třeba dodržet a je doporučené postupovat v tomto pořadí:
 5. Nastavení cache (volitelné).
 6. Vytvoření objektu `\MvcCore\Environment` a detekce prostředí
   (volitelné, ale nutné pro další inicializace níže).
-7. Načtení systémové konfigurace (volitelné, ale již podle detekované prostředí).
+7. Načtení systémové konfigurace (volitelné, ale již podle detekovaného prostředí).
 8. Nastavení autentizace uživatelů (volitelné).
 9. Nastavení routeru (volitelné).
 10. Ostatní nastavení výše neuvedené.
@@ -180,9 +181,11 @@ případech třeba dodržet a je doporučené postupovat v tomto pořadí:
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Cesta zpracování v aplikaci**](./README.md)  
-[další: **Průchod zpracování v aplikaci**](./app-dispatch.md)  
+[◀ předchozí: **Cesta zpracování v aplikaci**](./README.md)  
+[▶ další: **Průchod zpracování v aplikaci**](./app-dispatch.md)  
 
 </div>
