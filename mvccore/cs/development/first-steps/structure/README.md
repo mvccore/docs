@@ -53,7 +53,8 @@ Navíc zde mohou být následující volitelné složky, podle povahy aplikace:
 ./www/static/css      # složka s kaskádovými styly,
 ./www/static/js       # složka s TypeScript zdrojovými soubory (zde leží `tsconfig.json`),
 ./www/static/ts       # složka s TypeScript zdrojovými soubory (zde leží `tsconfig.json`),
-./www/static/Tmp      # složka s dočasnými skupinovými *.js soubory nebo *.d.ts soubory z jiných composer balíčků,
+./www/static/tmp      # složka s dočasnými skupinovými *.js soubory nebo *.d.ts soubory z jiných composer balíčků,
+                      # tato složka by měla mít oprávnění pro zápis 
 ```
 
 &nbsp;  
