@@ -72,10 +72,10 @@ Pokud plánujete aplikaci zabalit do jednosouborového řešení, měl by
 první řádek mít zavináč na začátku. Důvody "proč" přesahují rámec dokumentace.
 Pro standardní webové aplikace není nutné používat zavináč na začátku řádku.
 
-Řádek č. 2 je volání jednoduché třídy `Bootstrap`, která připraví 
+Řádek č. 3 je volání jednoduché třídy `Bootstrap`, která připraví 
 a nastaví novou instanci aplikace pro každý request.
 
-Řádek č. 3 je zpracování requestu frameworkem. Zde již pokračuje 
+Řádek č. 4 je zpracování requestu frameworkem. Zde již pokračuje 
 tok aplikace třídou `\MvcCore\Application`.
 
 &nbsp;  
