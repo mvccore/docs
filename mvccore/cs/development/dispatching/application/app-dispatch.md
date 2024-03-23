@@ -231,7 +231,7 @@ class Index extends \MvcCore\Controller {
 ## Ukončení požadavku a odeslání odpovědi
 
 Ukončení vyřizování dotazu aplikace interně nepoužívá a nelze provádět pomocí 
-metod `die();`, `exit();` nebo `exit;`¨, protože tak nedochází k případnému 
+metod `die();`, `exit();` nebo `exit;`, protože tak nedochází k případnému 
 ukládání sezení nebo k volání dalších nakonfigurováných handlerů aplikace.
 
 Ukončení aplikace je voláno automaticky a prováděno v metodě `$app->Terminate()`.
