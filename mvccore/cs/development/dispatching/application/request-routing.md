@@ -66,11 +66,11 @@ kde si ji MvcCore framework přečte a na základě tohoto řetězce postaví in
 `\MvcCore\Request` podle které probíhá zachycení routy v momentě [**Routování požadavku**](./app-dispatch.md#nalezení-routy-požadavku).
 
 Zachycená routa má pak v sobě od vývojáře definovaný controller a akci, 
-kam požadavek v daném tvaru směrovat a jaká controller a volání akce vytvořit. Případně má definované chování, jak si hodnoty pro controller a akcí získat.
+kam požadavek v daném tvaru směrovat a jaký controller a volání akce vytvořit. Případně má definované chování, jak si hodnoty pro controller a akci získat.
 
-Pokud má routa fixne uvedený controller nebo akci a přesto je v URL adrese query string
+Pokud má routa fixně uvedený controller nebo akci a přesto je v URL adrese query string
 obsahující parametr `controller` nebo `action`, výsledný controller nebo akce je
-prioritne zvolena podle query stringu. Což nese samozřejmě nutnost pohlídat si 
+prioritně zvolena podle query stringu. Což nese samozřejmě nutnost pohlídat si 
 v každé akci, zda mám všechny parametry, které budu v dalších činnostech nutně potřebovat,
 aby nedošlo k chybě. Ale to by vývojář měl dělat vždy zcela automaticky, i kdyby tato priorita ve frameworku nebyla.
 
