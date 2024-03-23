@@ -237,8 +237,8 @@ ukládání sezení nebo k volání dalších nakonfigurováných handlerů apli
 Ukončení aplikace je voláno automaticky a prováděno v metodě `$app->Terminate()`.
 
 Zde se postupně provádějí tyto volání:
-- registrace shutdown handler pro uložení sezení (pokud je nějaké nastartováno),
-- odeslání hlaviček a těla odpovědi (pokud ještě nebylo učiněno),
+- registrace shutdown handleru pro uložení sezení (pokud je nějaké nastartováno),
+- odeslání HTTP hlaviček a těla odpovědi (pokud ještě nebylo učiněno),
 - ukončení všech controllerů,
 - volání vlastních handlerů aplikace po ukončení vyřizování požadavku.
 
