@@ -7,7 +7,7 @@ tak, jak je uvedeno v `README.md` a poté aktualizovat composer závislosti pomo
 Pokud příklady používají databázi, mají souborovou databázi v SQLite 
 a také soubory SQL dumpů pro jiné implementace databáze.
 
-Příklady se snaží být maximálně zpětně kompatibilní a jsou napsané co nejednodušeji, 
+Příklady se snaží být maximálně zpětně kompatibilní a jsou napsané co nejjednodušeji, 
 aby nebyla prezentace kódu zaplevelena věcmi, které mohou na první pohled mást.
 
 ## Klasické příklady
