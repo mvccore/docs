@@ -100,6 +100,7 @@ za autoloading Composeru. Automaticky se nejprve hledá v těchto umístěních:
 - `./App`
 - `./Libs`
 - `.`
+
 Umístění lze konfigurovat pomocí definice konstant `MVCCORE_*`.
 
 Pokud tedy PHP hledá třídu `\App\Controllers\Index`, automaticky se hledá
@@ -169,7 +170,7 @@ případech třeba dodržet a je doporučené postupovat v tomto pořadí:
 5. Nastavení cache (volitelné).
 6. Vytvoření objektu `\MvcCore\Environment` a detekce prostředí
   (volitelné, ale nutné pro další inicializace níže).
-7. Načtení systémové konfigurace (volitelné, ale již podle detekované prostředí).
+7. Načtení systémové konfigurace (volitelné, ale již podle detekovaného prostředí).
 8. Nastavení autentizace uživatelů (volitelné).
 9. Nastavení routeru (volitelné).
 10. Ostatní nastavení výše neuvedené.
