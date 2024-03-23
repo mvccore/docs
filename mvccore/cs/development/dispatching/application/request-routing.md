@@ -220,7 +220,7 @@ neboť router nespouští všechny regulární výrazy rout pro dotazovanou URL 
 výrazy v rámci své skupiny. Pokud v URL není žádné první slovo ukončené nekončícím lomítkem,
 je název skupiny pro routu prázdný string.
 
-Je třeba takto seskupovat routy při přodávání do routeru manuálně:
+Je třeba takto seskupovat routy při přidávání do routeru manuálně:
 ```php
 $router
     ->AddRoutes([
