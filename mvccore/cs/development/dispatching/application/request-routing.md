@@ -216,7 +216,7 @@ První sekce mezi lomítky jsou znaky v cestě URL od prvního do druhého nekon
 ```
 
 Práce routeru se tím významně urychlí,
-neboď router nespouští všechny regulární výrazy rout pro dotazovanou URL ale pouze regulární 
+neboť router nespouští všechny regulární výrazy rout pro dotazovanou URL ale pouze regulární 
 výrazy v rámci své skupiny. Pokud v URL není žádné první slovo ukončené nekončícím lomítkem,
 je název skupiny pro routu prázdný string.
 
