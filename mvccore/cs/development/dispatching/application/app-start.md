@@ -130,7 +130,7 @@ načtena autoloadingem MvcCore.
 
 Třída Bootstrap nemusí implementovat žádný interface a její stavba 
 je pouze na základě zvyklostí, které říkají, že její veřejná 
-statická metoda `Init()` má vrátit instanci objektu applikace
+statická metoda `Init()` má vrátit instanci objektu aplikace
 v připraveném stavu pro vyřizování požadavku:
 ```php
 <?php
