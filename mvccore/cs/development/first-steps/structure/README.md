@@ -123,9 +123,9 @@ namespace App\Controllers;
 
 class Index extends \MvcCore\Controller {
 
-    public function IndexAction () {
+	public function IndexAction () {
 		$this->view->title = 'MvcCore Aplication';
-    }
+	}
 
 	public function NotFoundAction(){
 		$this->ErrorAction();
