@@ -42,7 +42,7 @@ Vyřizování požadavku uvnitř instance aplikace lze rozdělit do těchto krok
 &nbsp;&nbsp; 
 
 ## Inicializace/ověření existence hlavních objektů
-aplikace pro vyřízení požadavku potřebuje provést 4 základní inicializace:
+Aplikace pro vyřízení požadavku potřebuje provést 4 základní inicializace:
 
 - Vytvoření objektu prostředí a jeho detekce:
   - `$app->GetEnvironment()->GetName()`
