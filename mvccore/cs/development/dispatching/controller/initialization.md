@@ -4,7 +4,7 @@
 - [**Úvod**](#úvod)
 - [**Kdy je inicializace volána, příklad**](#kdy-je-inicializace-volána-příklad)
 - [**Volání rodičivské metody**](#volání-rodičivské-metody)
-- [**Interní zaregistrování `$this` do kolekce všech kontrollerů**](#interní-zaregistrování-this-do-kolekce-všech-kontrollerů)
+- [**Interní zaregistrování `$this` do kolekce všech controllerů**](#interní-zaregistrování-this-do-kolekce-všech-controllerů)
 - [**Automatické nastartování session podle `$controller->autoStartSession`**](#automatické-nastartování-session-podle-controller-autostartsession)
 - [**Automatická inicializace označených vlastností**](#automatická-inicializace-označených-vlastností)
   - [**Upozornění pro auto-inicializaci**](#upozornění-pro-auto-inicializaci)
@@ -17,7 +17,7 @@
 
 ## Úvod
 Inicializace controlleru samozřejmě může probíhat i ve vlastním konstruktoru controlleru.  
-Zde je však "inicialice controlleru" nazýván proces, kdy je na nastavené instanci controlleru 
+Zde je však "inicializace controlleru" nazýván proces, kdy je na nastavené instanci controlleru 
 volána aplikací veřejná metoda:
 ```php
 $controller->Init(): void;
@@ -68,7 +68,7 @@ class Product extends \MvcCore\Controller {
 
 ## Volání rodičivské metody
 Controller má automaticky rozšířením třídy `\MvcCore\Controller` tuto metodu implementovanou od předka.  
-Pokud chceme něco k této mětodě přidat, je nutné vždy volat stejně pojmenovanou metodu rodičovské třídy.
+Pokud chceme něco k této metodě přidat, je nutné vždy volat stejně pojmenovanou metodu rodičovské třídy.
 Rodičovskou metodu bychom měli volat ideálně jako první statement v metodě `Init()`:
 ```php
 <?php
@@ -101,8 +101,8 @@ Zavoláním rodičovské metody `parent::Init();` zařídíme:
 [↑ Obsah](#obsah)  
 &nbsp;&nbsp; 
 
-## Interní zaregistrování `$this` do kolekce všech kontrollerů
-Každý controller je při svém vytvoření v mětodě `\MvcCore\Controller::CreateInstance();` zaregistrován 
+## Interní zaregistrování `$this` do kolekce všech controllerů
+Každý controller je při svém vytvoření v metodě `\MvcCore\Controller::CreateInstance();` zaregistrován 
 do skladu všech controllerů, aby bylo možné s controllery globálně pracovat frameworkem.
 Pokud je metoda `\MvcCore\Controller::CreateInstance();` implementována zcela jinak, 
 volání rodičovské funkce `parent::Init()` pro jistotu ověří, zda je aktuální kontext controlleru 
