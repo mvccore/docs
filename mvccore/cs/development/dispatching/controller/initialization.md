@@ -350,15 +350,15 @@ MvcCore záměrně neimplementuje Dependency Injection design pattern a maximál
 způsobem této automatické inicializace. Je to z následujících důvodů:
 - I když DI container používá cache, stojí další procesní čas,
 - DI potřebuje více kódu a konfigurace => další tooling => další know how navíc pro start práce,
-- MvcCore nepracuje asynchronně a pro práci s modely se využívá design pattern Active Record,
+- MvcCore nepracuje asynchronně a prozatím nepoužívá PHP woekery, pro práci s modely se využívá design pattern Active Record,
   blokový kód a co nejjednodušší přístup.
   
 Vývojář chce programovat nebo vydělávat pěníze? Chce vydělávat peníze tak, aby ho práce bavila
 a aby denně neluštil ošklivý kód. MvcCore je navrženo tak, aby nevznikali dlouhé třídy,
-kde nelze najít pohodlně závislost. Každá controller, model či cokoliv jiného
+kde nelze najít pohodlně závislost. Každý controller, model či cokoliv jiného
 lze i v sebesložitější aplikaci strukturovat tak, aby to bylo v rámci doporučení coding standards.
 
-Dependency injection přináší pouze syntaktickou pohodu. I testování nebo více
+Dependency injection zatím přináší syntaktickou pohodu, nebo je nutně třeba až pro aplikace používající PHP workery či asynchronní přístup. I testování nebo více
 databázových serverů je standardně možné řešit jinak než pomocí DI. 
 
 V praxi se setkávám spíše s testováním celého funkčního výsledku.
@@ -380,8 +380,8 @@ Zde nejsou myšleny děti jako potomci tříd, ale jako děti controlleru přida
 pomocí `$controller->AddChildController($subController);`.
 
 Pokud využíváme automatickou inicializaci pro sub-controllery (formuláře 
-nebo DataGridů, což jsou také jen rozšíření controlleru), je třeba i na nich zavolat 
-standardní metodu `$subcontroller->Init();`, aby i v nich proběhl životní cyklus
+nebo datagridy, což jsou také jen rozšíření controlleru), je třeba i na nich zavolat 
+standardní metodu `$subController->Init();`, aby i v nich proběhl životní cyklus
 controlleru tak jako jinde. Právě toto zavolání `Init()` metody na sub-controllerech 
 řeší volání rodičovské metody `parent::Init();`.
 
