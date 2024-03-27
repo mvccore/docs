@@ -480,7 +480,7 @@ class Base extends \MvcCore\Controller {
 
 ### Helpery s funkcemi pro lokalizaci
 Často je třeba view helpery nastavit mnohem sofistikovaněji podle potřeb lokalizace aplikace.
-Pro tytp účely je třeba nainstalovat extenzi se základní třídou, která rozšiřuje možnosti view helperů ještě o něco více:
+Pro tyto účely je třeba nainstalovat extenzi se základní třídou, která rozšiřuje možnosti view helperů ještě o něco více:
 ```sh
 composer require mvccore/ext-view-helper-internationalized
 ```
@@ -496,7 +496,7 @@ Tuto třídu již používají extenze MvcCore pro formátování čísel, finan
 &nbsp;&nbsp; 
 
 #### Příklad lokalizovaného helperu
-Rozšíření může ve výsledku vypadat velmi jednoduše puze podědením jiného rozšíření, které udělá mnoho práce za Vás.
+Rozšíření může ve výsledku vypadat velmi jednoduše pouze podědením jiného rozšíření, které udělá mnoho práce za Vás.
 Nebo můžete využít veškeré možnosti lokalizačních vlastností níže a naprogramovat vlastní formátování podmíněné nastavením lokalizace.
 ```php
 <?php
