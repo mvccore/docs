@@ -10,7 +10,7 @@
 - [**Vykreslení obsahu šablony akce uvnitř šablony layoutu**](#vykreslení-obsahu-šablony-akce-uvnitř-šablony-layoutu)
 
 ## Úvod
-Renderování šablon v MvcCore funcguje na jednoduchém nativním principu PHP renderování:
+Renderování šablon v MvcCore funguje na jednoduchém nativním principu PHP renderování:
 ```php
 // obsah šablony: ./cesta/index.phtml
 <h1><?php echo 'Hello world!'; ?></h1>
