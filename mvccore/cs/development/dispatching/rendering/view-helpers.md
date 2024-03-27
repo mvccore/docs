@@ -181,7 +181,7 @@ Některé pomocné funkce jsou obsáhlejší a proto nejsou součástí jádra.
 
 Extenze view helperů jsou ale nadmíru užitečné a maximálně doporučované.
 Obsahují pomocné funkce pro práci s JS/TS a CSS soubory pro bundling, minimalizace apod.,
-obsahují formátování nejčastějších typů nebo obsahují funkce práci s textem.
+obsahují formátování nejčastějších typů nebo obsahují funkce pro práci s textem.
 
 Podrobnější seznam view helper extenzí a odkazy na své dokumentace nelzente v sekci [**Rozšíření a repozitáře MvcCore**](../../../extensions.md#rozšíření---pomocné-funkce-šablon)
 ```php
