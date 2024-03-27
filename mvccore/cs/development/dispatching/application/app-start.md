@@ -181,9 +181,11 @@ případech třeba dodržet a je doporučené postupovat v tomto pořadí:
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Cesta zpracování v aplikaci**](./README.md)  
-[další: **Průchod zpracování v aplikaci**](./app-dispatch.md)  
+[◀ předchozí: **Cesta zpracování v aplikaci**](./README.md)  
+[▶ další: **Průchod zpracování v aplikaci**](./app-dispatch.md)  
 
 </div>

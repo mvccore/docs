@@ -11,3 +11,14 @@ případně se vraťtě odkazem v textu.
 - [**Konfigurace a prostředí**](./config-evn/README.md)
 - [**Debugging a logování**](./debug-log/README.md)
 - [**Sezení a jmenné prostory**](./session/README.md)
+
+---
+
+[▲ o úroveň výš](../README.md)
+
+<div class="prev-next">
+
+[◀ předchozí: **Ukončení sezení**](../dispatching/rendering/session-saving.md)
+[▶ další: **Vytváření URL adres**](./urls/README.md)
+
+</div>

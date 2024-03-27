@@ -573,9 +573,11 @@ $this->Url('documents', ['path' => 'contacts/stores']);
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Konstrukce aplikace**](../README.md)  
-[další: **Controllery a sub-controllery**](../controller/README.md)  
+[◀ předchozí: **Konstrukce aplikace**](../README.md)  
+[▶ další: **Controllery a sub-controllery**](../controller/README.md)  
 
 </div>

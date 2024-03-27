@@ -71,9 +71,11 @@ $controller->SetRouter(\MvcCore\Router $router);: \MvcCore\Controller;
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Životní cyklus controlleru**](./lifecycle.md)  
-[další: **Inicializace controlleru**](./initialization.md)  
+[◀ předchozí: **Životní cyklus controlleru**](./lifecycle.md)  
+[▶ další: **Inicializace controlleru**](./initialization.md)  
 
 </div>

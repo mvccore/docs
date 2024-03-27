@@ -54,9 +54,11 @@ Primární účel může být např.:
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Vytváření URL adres**](../urls/README.md)  
-[další: **Vytvoření a renderování sub-controllerů**](./constructions/sub-controllers-dispatching.md) 
+[◀ předchozí: **Vytváření URL adres**](../urls/README.md)  
+[▶ další: **Vytvoření a renderování sub-controllerů**](./sub-controllers-dispatching.md) 
 
 </div>

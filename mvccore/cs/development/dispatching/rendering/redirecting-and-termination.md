@@ -111,9 +111,11 @@ $app->Terminate();
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Výstupy z controlleru, typy odpovědí**](./controller-output.md)  
-[další: **Odeslání hlaviček a obsahu**](./response-sending.md)  
+[◀ předchozí: **Výstupy z controlleru, typy odpovědí**](./controller-output.md)  
+[▶ další: **Odeslání hlaviček a obsahu**](./response-sending.md)  
 
 </div>

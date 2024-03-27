@@ -160,9 +160,11 @@ nebo do nich includovat nějakou třetí společnou šablonu.
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Příprava renderování controlleru**](./pre-dispatching.md)  
-[další: **Renderování a odesílání**](../rendering/README.md)  
+[◀ předchozí: **Příprava renderování controlleru**](./pre-dispatching.md)  
+[▶ další: **Renderování a odesílání**](../rendering/README.md)  
 
 </div>

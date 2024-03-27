@@ -219,9 +219,11 @@ class MainNav extends \MvcCore\Controller {
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Controllery a sub-controllery**](./README.md)  
-[další: **Routování akcí do sub-controllerů**](./sub-controllers-routing.md) 
+[◀ předchozí: **Controllery a sub-controllery**](./README.md)  
+[▶ další: **Routování akcí do sub-controllerů**](./sub-controllers-routing.md) 
 
 </div>

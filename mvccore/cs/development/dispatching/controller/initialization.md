@@ -391,9 +391,11 @@ controlleru tak jako jinde. Právě toto zavolání `Init()` metody na sub-contr
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Instancování a konstruktor**](./instancing-and-constructor.md)  
-[další: **Inicializace akcí controlleru**](./action-initialization.md)  
+[◀ předchozí: **Instancování a konstruktor**](./instancing-and-constructor.md)  
+[▶ další: **Inicializace akcí controlleru**](./action-initialization.md)  
 
 </div>

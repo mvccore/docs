@@ -192,9 +192,11 @@ Pokud je hierarchie vykreslování controlerů a view vyšší, je možné volá
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Renderování šablon**](./views-rendering.md)  
-[další: **Základní view helpery**](./view-helpers.md)  
+[◀ předchozí: **Renderování šablon**](./views-rendering.md)  
+[▶ další: **Základní view helpery**](./view-helpers.md)  
 
 </div>

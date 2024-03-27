@@ -194,9 +194,11 @@ Volání používáme pro oba módy renderování:
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Módy renderování**](./rendering-modes.md)  
-[další: **Proměnné šablon**](./view-variables.md)  
+[◀ předchozí: **Módy renderování**](./rendering-modes.md)  
+[▶ další: **Proměnné šablon**](./view-variables.md)  
 
 </div>

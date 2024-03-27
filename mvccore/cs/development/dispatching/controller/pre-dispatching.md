@@ -129,9 +129,11 @@ class Base extends \MvcCore\Controller {
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Inicializace akcí controlleru**](./action-initialization.md)  
-[další: **Volání akcí controlleru**](./action.md)  
+[◀ předchozí: **Inicializace akcí controlleru**](./action-initialization.md)  
+[▶ další: **Volání akcí controlleru**](./action.md)  
 
 </div>

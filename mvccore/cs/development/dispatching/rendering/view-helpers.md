@@ -610,9 +610,11 @@ $this->defaultLangAndLocale = ['en', 'US'];
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Proměnné šablon**](./view-variables.md.md)  
-[další: **Výstupy z controlleru, typy odpovědí**](./controller-output.md)  
+[◀ předchozí: **Proměnné šablon**](./view-variables.md.md)  
+[▶ další: **Výstupy z controlleru, typy odpovědí**](./controller-output.md)  
 
 </div>

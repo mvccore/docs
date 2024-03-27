@@ -254,9 +254,11 @@ sahat aktivně na hodnoty v sezení a případně změnit co je třeba.
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Start aplikace**](./app-start.md)  
-[další: **Routování dotazů**](./request-routing.md)  
+[◀ předchozí: **Start aplikace**](./app-start.md)  
+[▶ další: **Routování dotazů**](./request-routing.md)  
 
 </div>

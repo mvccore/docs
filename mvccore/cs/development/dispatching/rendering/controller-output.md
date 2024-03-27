@@ -477,9 +477,11 @@ Pro chybové odpovědi máme v Mvccore aplikaci několik možností:
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Escapování**](./escaping.md)  
-[další: **Přesměrování a ukončování**](./redirecting-and-termination.md)  
+[◀ předchozí: **Escapování**](./escaping.md)  
+[▶ další: **Přesměrování a ukončování**](./redirecting-and-termination.md)  
 
 </div>

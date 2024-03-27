@@ -138,9 +138,11 @@ echo 'OK';
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Přesměrování a ukončování**](./redirecting-and-termination.md)  
-[další: **Ukončení sezení**](./session-saving.md)  
+[◀ předchozí: **Přesměrování a ukončování**](./redirecting-and-termination.md)  
+[▶ další: **Ukončení sezení**](./session-saving.md)  
 
 </div>

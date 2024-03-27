@@ -28,9 +28,11 @@ Cestu průchodu zpracování požadavku lze rozdělit do zhruba tří oblastí:
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Používání příkladů**](../first-steps/examples/README.md)  
-[další: **Cesta zpracování v aplikaci**](./application/README.md)  
+[◀ předchozí: **Používání příkladů**](../first-steps/examples/README.md)  
+[▶ další: **Cesta zpracování v aplikaci**](./application/README.md)  
 
 </div>

@@ -115,9 +115,11 @@ if (
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Odeslání hlaviček a obsahu**](./response-sending.md)  
-[další: **Pokročilejší konstrukce**](../../constructions/README.md)  
+[◀ předchozí: **Odeslání hlaviček a obsahu**](./response-sending.md)  
+[▶ další: **Pokročilejší konstrukce**](../../constructions/README.md)  
 
 </div>

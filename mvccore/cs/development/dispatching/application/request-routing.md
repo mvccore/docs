@@ -671,9 +671,11 @@ class Router extenre \MvcCore\Router {
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Průchod zpracování v aplikaci**](./app-dispatch.md)  
-[další: **Vlastní handlery klíčových událostí**](./custom-handlers.md)  
+[◀ předchozí: **Průchod zpracování v aplikaci**](./app-dispatch.md)  
+[▶ další: **Vlastní handlery klíčových událostí**](./custom-handlers.md)  
 
 </div>

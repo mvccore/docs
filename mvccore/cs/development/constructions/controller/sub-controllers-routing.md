@@ -231,9 +231,11 @@ $router->AddRoutes([
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Vytvoření a renderování sub-controllerů**](./sub-controllers-dispatching.md)  
-[další: **Dočasné zprávy - flash messages**](./flash-messages.md)
+[◀ předchozí: **Vytvoření a renderování sub-controllerů**](./sub-controllers-dispatching.md)  
+[▶ další: **Dočasné zprávy - flash messages**](./flash-messages.md)
 
 </div>

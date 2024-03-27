@@ -96,9 +96,11 @@ Více o podmínkách vyřízení controlleru v sekci [**Průchod zpracování v 
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Inicializace controlleru**](./initialization.md)  
-[další: **Příprava renderování controlleru**](./pre-dispatching.md)  
+[◀ předchozí: **Inicializace controlleru**](./initialization.md)  
+[▶ další: **Příprava renderování controlleru**](./pre-dispatching.md)  
 
 </div>

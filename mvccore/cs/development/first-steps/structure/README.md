@@ -183,9 +183,11 @@ class Index extends \MvcCore\Controller {
 
 ---
 
+[▲ o úroveň výš](../../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Založení projektu**](../new-project/README.md)  
-[další: **Používání příkladů**](../examples/README.md)
+[◀ předchozí: **Založení projektu**](../new-project/README.md)  
+[▶ další: **Používání příkladů**](../examples/README.md)
 
 </div>

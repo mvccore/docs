@@ -16,9 +16,11 @@ a sekce o [**PHP autoloadingu**](../../dispatching/application/app-start.md#php-
 
 ---
 
+[▲ o úroveň výš](../../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Vývoj aplikací**](../../README.md)  
-[další: **Struktura složek projektu**](../structure/README.md)
+[◀ předchozí: **Vývoj aplikací**](../../README.md)  
+[▶ další: **Struktura složek projektu**](../structure/README.md)
 
 </div>

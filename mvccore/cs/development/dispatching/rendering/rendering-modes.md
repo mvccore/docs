@@ -290,9 +290,11 @@ Více o ukončování požadavku v sekci [**Průchod zpracování v aplikaci**](
 
 ---
 
+[▲ o úroveň výš](../README.md)
+
 <div class="prev-next">
 
-[předchozí: **Renderování a odesílání**](./README.md)  
-[další: **Renderování šablon**](views-rendering.md/)  
+[◀ předchozí: **Renderování a odesílání**](./README.md)  
+[▶ další: **Renderování šablon**](views-rendering.md/)  
 
 </div>

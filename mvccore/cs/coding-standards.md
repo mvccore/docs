@@ -80,3 +80,13 @@ K ohraničení řetězce by se měly používat jednoduché uvozovky (apostrof, 
 Zdvojené uvozovky by se měli použít pouze v těchto případech:
 - string obsahuje znak jednoduchých uvozovek (apostrof, `'`),
 - string obsahuje text, který bude zobrazován uživateli.
+
+---
+
+[▲ o úroveň výš](../../README.md)
+
+<div class="prev-next">
+
+[◀ předchozí: **O frameworku**](./about.md) 
+
+</div>

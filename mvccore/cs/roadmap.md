@@ -2,6 +2,8 @@
 
 - Dokumentace
 
+
+
 - Controller:
   - Pro skládání controllerů pomocí traitů by bylo dobré udelat v controlleru metody:
     - AddInitHandler(), 
@@ -17,7 +19,7 @@
     zda cilový kontroller/akce/routa existuji a připadně někam zapsal nebo vyhodil vyjímku.
 
 - Spuštění přes PHP server
-  - `php -S 127.0.0.1:8000` index.php`
+  - `php -S 127.0.0.1:8000 index.php`
   - PHPSAPI bude `cli-server` - a není jisté, zda všechny potřebné `$_SERVER` hodnoty budou známy.
 
 - Refactoring interfaces
@@ -33,22 +35,24 @@
 
 - Testy
 
-- Třída Context
+- Třída HTTP Context
   - Ekvivalent třídy v .NET Core - HttpContext
   - Třída by měla obsahovat aplikační objekty, které se liší v requestech
   - Vše ostatní mito tuto třídu by mělo jít cachovat nebo by mělo umět existovat 
     v nezměněné podobě v paměti pro budoucí implementaci asynchronního fungování
   - Toto bude velká změna, měl by být nějaký major release.
+  - Tato třída bude třeba pro implementaci DI a běhového prostředí [franken.php](https://frankenphp.dev/)
 
 - Dependency Injection
   - Zhodnotit, za má nyní smysl, dokud nefunguje framwork asynchronně.
-  - Zhodnotit klady nové magie zápisu oproti základnímu poslání framworku.
+    - Ano má, pokud se bude implementovat běhové prostředí [franken.php](https://frankenphp.dev/)
+  - Zhodnotit klady nové magie zápisu oproti základnímu poslání framworku a jak by to celé šlo zkrátit
 
 - Implementovat asynchronní fungování celého framworku
-  - Podívat se, zda by šlo udělat vlastní server pomocí php-pm, 
+  - Perfektní řešení, které celkem odpovídá maximálně možnému:
+	- [franken.php](https://frankenphp.dev/)
+  - Podívat se, zda by šlo i udělat vlastní server pomocí php-pm, 
     nebo react php nebo pomocí: https://amphp.org/
-  - Docela hezké řešení na první pohled:
-	- https://frankenphp.dev/
   - Bude třeba odstranit globání PHP záležitosti:
 	  - setlocale(), default_timezone_set()...
 	  - super globální proměnné
@@ -68,3 +72,14 @@
   - YAML konfigurace samostatně, ne pouze jako zakomentovaný option v jiném příkladu.
   - Příklad pro databázový translator s kategoriemi.
   - Příklad, kde je více domén v jedné aplikaci.
+
+---
+
+[▲ o úroveň výš](../../README.md)
+
+<div class="prev-next">
+
+[◀ předchozí: **Seznam extenzí a repozitářů**](./extensions.md)  
+[▶ další: **O frameworku**](./about.md)  
+
+</div>
