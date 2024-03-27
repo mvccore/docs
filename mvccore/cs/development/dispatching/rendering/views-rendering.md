@@ -45,10 +45,13 @@ se renderování urychluje, protože není třeba prohledávat pro každou
 &nbsp;&nbsp; 
 
 ### Umístění šablony akce
-Uvažujme nálsedující controller a akci:
-- PHP název třídy a metody akce: `\App\Controllers\EshopOrder\Chart::ChartAction()`,
-- příp. stejný zápis v routě: `EshopOrder\Chart::Chart`,
-- příp. stejný zápis v query stringu: `?controller=eshop-order&action=chart`.
+Uvažujme následující controller a akci:
+- PHP název třídy a metody akce:  
+  `\App\Controllers\EshopOrder\Chart::ItemsAction()`,
+- příp. stejný zápis v routě:  
+  `EshopOrder\Chart::Items`,
+- příp. stejný zápis v query stringu:  
+  `?controller=eshop-order/chart&action=items`.
 
 Šablona musí ležet v umístění `./App/Views/Scripts/eshop-order/chart/items.phtml`.
 
