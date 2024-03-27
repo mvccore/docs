@@ -103,7 +103,7 @@ je zapsána cesta, kde měl soubor být. Proto je práce s těmito helpery velmi
 ## Url helpery
 Funkce sloužící pro vytváření URLs podle rewrite rout nebo pomocí query stringu.
 ```php
-// objektové volání do \MvcCore\View\UrlHelpers:
+// objektové volání (\MvcCore\View\UrlHelpers):
 $this->Url(string $controllerActionOrRouteName = 'Index:Index', array $params = []): string;
 $this->AssetUrl(string $path): string;
 // zkrácené lokální closure funkce:
@@ -113,7 +113,7 @@ $assetUrl(string $path): string;
 Helper `Url()` slouží pro standardní vytváření URL adres a jde o zkratku do funkce `Url()` v routeru.
 
 Helper `AssetUrl()` slouží pro vytváření URL adres na JS/CSS soubory nebo obrázky, které budou 
-zabaleny do jedno-souborové aplikace.
+zabaleny do jedno-souborové aplikace. Ve standardním typu webové aplikace tento helper nepoužívejte.
 
 Více o vytváření URL adres v sekci [**Vytváření adres aplikace**](../../constructions/urls.md).
 
