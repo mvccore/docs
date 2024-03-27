@@ -58,13 +58,13 @@ novou lokální proměnnou nebo změním existující lokální proměnnou, změ
 (nereferenční) datový typ proměnné - tedy `bool`, `int`, `float`, `string`, `null` a `array`.
 
 Pokud použiji zápis `$this->variable` a vytvořím nebo změním proměnnou, bude nová hodnota proměnné 
-známa i v jiných šablonách. Proto je zápis přes kontext `$this` vždy flexibilnější, ale protože využívá
-PHP magickou funkci `__get()`, je i o něco pomalejší, pokud ho budete používat v nějakém cyklu opakovaně.
+známa i v jiných šablonách. Proto je používání přes kontext `$this` vždy flexibilnější, ale protože využívá
+PHP magické funkce `__get()` a `__set()`, je i o něco pomalejší, pokud budete proměnnou používat v nějakém cyklu opakovaně.
 
 Získávání proměnných přes `$this` kontext pomocí PHP magické funkce `__get()` přináší ještě jeden benefit.
 Lze přistupovat k `public`, `protected` i `private` vlastnostem controlleru přímo z view,
 aniž byste je museli do view z controlleru explicitně definovat. Je to užitečné pro případ, že jste na 
-něco zapoměli nebo pokud pracujete s nějakou komponentou třetí strany a její vývojář nenastavil 
+něco zapomněli nebo pokud pracujete s nějakou komponentou třetí strany a její vývojář nenastavil 
 do view vše, co jste potřebovali. Opět je to zde ale zaplaceno tím, že magické funkce budou o něco pomalejší.
 
 Pokud to tak děláte běžně, ztratíte tak více přehled o tom, co vše šablona z controlleru potřebuje definovat.
