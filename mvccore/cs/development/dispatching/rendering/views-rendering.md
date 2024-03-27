@@ -166,7 +166,7 @@ class Admin extends \MvcCore\Controller {
 	protected $layout = 'admins/standard'; // použije se layout šablona ./Views/Layouts/admins/standard.phtml
 }
 
-// ./App/Controllers/Admin.php
+// ./App/Controllers/Admins/Invoice.php
 namespace App\Controllers\Admins;
 
 class Invoice extends App\Controllers\Admin {
