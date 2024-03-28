@@ -26,7 +26,7 @@ aby nebyla prezentace kódu zaplevelena věcmi, které mohou na první pohled m�
 - [Hello World - Portable](https://github.com/mvccore/example-helloworld-portable)
 - [Pig Latin Translator - Portable](https://github.com/mvccore/example-translator-portable)
 - [CD Collection - Portable](https://github.com/mvccore/example-cdcol-portable)
-- [Project BaAsic - Portable](https://github.com/mvccore/project-basic-portable)
+- [Project Basic - Portable](https://github.com/mvccore/project-basic-portable)
 
 ---
 
