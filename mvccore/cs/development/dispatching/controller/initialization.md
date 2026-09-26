@@ -350,7 +350,7 @@ MvcCore záměrně neimplementuje Dependency Injection design pattern a maximál
 způsobem této automatické inicializace. Je to z následujících důvodů:
 - I když DI container používá cache, stojí další procesní čas,
 - DI potřebuje více kódu a konfigurace => další tooling => další know how navíc pro start práce,
-- MvcCore nepracuje asynchronně a prozatím nepoužívá PHP woekery, pro práci s modely se využívá design pattern Active Record,
+- MvcCore nepracuje asynchronně a prozatím nepoužívá PHP workery, pro práci s modely se využívá design pattern Active Record,
   blokový kód a co nejjednodušší přístup.
   
 Vývojář chce programovat nebo vydělávat pěníze? Chce vydělávat peníze tak, aby ho práce bavila
